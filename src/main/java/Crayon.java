@@ -1,21 +1,63 @@
+import java.util.Scanner;
+
 public class Crayon {
+
+    private static final String SEPARATOR = "________________________________________";
+    private static final String ASCII_NAME = """
+          ____ ____     _ __   _____  _   _
+         / ___|  _ \\   / \\\\ \\ / / _ \\| \\ | |
+        | |   | |_) | / _ \\\\ V | | | |  \\| |
+        | |___|  _ < / ___ \\| || |_| | |\\  |
+         \\____|_| \\_/_/   \\_|_| \\___/|_| \\_|
+        
+        """;
+
     public static void main(String[] args) {
-        greeting();
-        exit();
+        greetUser();
+        echoMessage();
+        sayGoodbye();
     }
 
-    public static void greeting() {
-        String message = "________________________________________\n"
-                + "Hello! I'm Crayon\n"
+    /**
+     * Display initial greeting message when Crayon starts up.
+     */
+    private static void greetUser() {
+        String message = SEPARATOR + "\n"
+                + "Hello! I'm\n"
+                + ASCII_NAME
                 + "What can I do for you?\n"
-                + "________________________________________";
+                + SEPARATOR;
 
         System.out.println(message);
     }
 
-    public static void exit() {
-        String message = "Bye. Hope to see you again soon!\n"
-                + "________________________________________\n";
+    /**
+     * Display farewell message when the conversation ends.
+     */
+    private static void sayGoodbye() {
+        String message = SEPARATOR + "\n"
+                + "Bye. Hope to see you again soon!\n"
+                + SEPARATOR + "\n";
+
         System.out.println(message);
+    }
+
+    /**
+     * Echoes the user message back.
+     */
+    private static void echoMessage() {
+
+        try (Scanner sc = new Scanner(System.in)) {
+            while (true) {
+                String userInput = sc.nextLine();
+                if (userInput.equals("bye")) break;
+
+                String message = SEPARATOR + "\n"
+                        + userInput +  "\n"
+                        + SEPARATOR + "\n";
+
+                System.out.println(message);
+            }
+        }
     }
 }
