@@ -13,7 +13,7 @@ public class Crayon {
         
         """;
 
-    private static ArrayList<String> taskList = new ArrayList<String>();
+    private static final ArrayList<String> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
         greetUser();
@@ -56,7 +56,11 @@ public class Crayon {
                 if (userInput.equals("bye")) {
                     break;
                 } else if (userInput.equals("list")) {
-                    System.out.println("TO BE IMPLEMENTED");
+                    int counter = 1;
+                    for(String task : taskList) {
+                        System.out.println(counter + ". " + task);
+                        counter++;
+                    }
                 } else {
                     taskList.add(userInput);
                     String message = SEPARATOR + "\n"
