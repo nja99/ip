@@ -1,3 +1,5 @@
+import tasks.Task;
+
 import java.util.ArrayList;
 
 public class TaskManager {
@@ -8,8 +10,15 @@ public class TaskManager {
      * Add to list of tasks
      * @param taskDescription task to be added to the list
      */
-    public static void addTask(String taskDescription) {
-        tasks.add(new Task(taskDescription));
+    public static void addTask(Task taskDescription) {
+        tasks.add(taskDescription);
+
+        StringBuilder sb = new StringBuilder(Constants.SEPARATOR);
+        sb.append("Got it. I've added this task:\n    ");
+        sb.append(taskDescription).append("\n");
+        sb.append("Now you have ").append(tasks.size()).append(" tasks in the list\n");
+        sb.append(Constants.SEPARATOR);
+        System.out.println(sb);
     }
 
     /**
@@ -19,9 +28,9 @@ public class TaskManager {
         int counter = 1;
 
         StringBuilder sb = new StringBuilder(Constants.SEPARATOR);
-        sb.append("Here are the tasks in your list:\n");
+        sb.append("Here are the tasks in your list:\n    ");
         for(Task task : tasks) {
-            sb.append(counter).append(".").append(task);
+            sb.append(counter).append(".").append(task).append("\n");
             counter++;
         }
         sb.append(Constants.SEPARATOR);
@@ -36,19 +45,27 @@ public class TaskManager {
 
         Task task = tasks.get(taskId - 1);
         task.markDone();
-        System.out.println("Nice! I've marked this task as done:\n");
-        System.out.println(task);
+
+        StringBuilder sb = new StringBuilder(Constants.SEPARATOR);
+        sb.append("Nice! I've marked this task as done:\n    ");
+        sb.append(task).append("\n");
+        sb.append(Constants.SEPARATOR);
+        System.out.println(sb);
     }
 
     public static void markTaskAsUndone(int taskId) {
-        if(taskId < 0 || taskId >= tasks.size()) {
+        if(taskId < 1 || taskId >= tasks.size() + 1) {
             System.out.println("Invalid task id: " + taskId);
             return;
         }
 
         Task task = tasks.get(taskId - 1);
         task.markUndone();
-        System.out.println("OK, I've marked this task as not done yet:\n");
-        System.out.println(task);
+
+        StringBuilder sb = new StringBuilder(Constants.SEPARATOR);
+        sb.append("OK, I've marked this task as not done yet:\n    ");
+        sb.append(task).append("\n");
+        sb.append(Constants.SEPARATOR);
+        System.out.println(sb);
     }
 }

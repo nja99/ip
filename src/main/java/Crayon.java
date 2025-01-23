@@ -1,3 +1,7 @@
+import tasks.Deadline;
+import tasks.Event;
+import tasks.ToDo;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -39,11 +43,23 @@ public class Crayon {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             while (!isBye) {
                 String userInput = br.readLine();
-                String[] args = userInput.split(" ");
+                String[] args = userInput.split(" ", 2);
+                String taskDescription = "";
+
+                if(args.length > 1) taskDescription = args[1].trim();
 
                 switch (args[0]) {
                     case "list":
                         TaskManager.listTasks();
+                        break;
+                    case "todo":
+                        TaskManager.addTask(new ToDo(taskDescription));
+                        break;
+                    case "deadline":
+                        TaskManager.addTask(new Deadline(taskDescription));
+                        break;
+                    case "event":
+                        TaskManager.addTask(new Event(taskDescription));
                         break;
                     case "mark":
                         TaskManager.markTaskAsDone(Integer.parseInt(args[1]));
@@ -55,11 +71,6 @@ public class Crayon {
                         sayGoodbye();
                         break;
                     default:
-                        TaskManager.addTask(userInput);
-                        String message = Constants.SEPARATOR
-                                + "added: " + userInput +  "\n"
-                                + Constants.SEPARATOR;
-                        System.out.println(message);
                         break;
                 }
             }
