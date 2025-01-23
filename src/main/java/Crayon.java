@@ -13,8 +13,6 @@ public class Crayon {
         
         """;
 
-    private static final ArrayList<String> taskList = new ArrayList<>();
-
     public static void main(String[] args) {
         greetUser();
         echoMessage();
@@ -56,13 +54,9 @@ public class Crayon {
                 if (userInput.equals("bye")) {
                     break;
                 } else if (userInput.equals("list")) {
-                    int counter = 1;
-                    for(String task : taskList) {
-                        System.out.println(counter + ". " + task);
-                        counter++;
-                    }
+                    TaskManager.listTasks();
                 } else {
-                    taskList.add(userInput);
+                    TaskManager.addTask(userInput);
                     String message = SEPARATOR + "\n"
                             + "added: " + userInput +  "\n"
                             + SEPARATOR + "\n";
