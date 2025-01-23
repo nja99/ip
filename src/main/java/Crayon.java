@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Crayon {
@@ -11,6 +12,8 @@ public class Crayon {
          \\____|_| \\_/_/   \\_|_| \\___/|_| \\_|
         
         """;
+
+    private static ArrayList<String> taskList = new ArrayList<String>();
 
     public static void main(String[] args) {
         greetUser();
@@ -50,13 +53,18 @@ public class Crayon {
         try (Scanner sc = new Scanner(System.in)) {
             while (true) {
                 String userInput = sc.nextLine();
-                if (userInput.equals("bye")) break;
+                if (userInput.equals("bye")) {
+                    break;
+                } else if (userInput.equals("list")) {
+                    System.out.println("TO BE IMPLEMENTED");
+                } else {
+                    taskList.add(userInput);
+                    String message = SEPARATOR + "\n"
+                            + "added: " + userInput +  "\n"
+                            + SEPARATOR + "\n";
 
-                String message = SEPARATOR + "\n"
-                        + userInput +  "\n"
-                        + SEPARATOR + "\n";
-
-                System.out.println(message);
+                    System.out.println(message);
+                }
             }
         }
     }
