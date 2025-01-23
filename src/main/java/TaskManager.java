@@ -7,9 +7,9 @@ public class TaskManager {
 
     private static final ArrayList<Task> tasks = new ArrayList<>();
     private static final String TASK_ADDED_MESSAGE = "Got it. I've added this task";
-    private static final String TASK_REMOVED_MESSAGE = "Noted. I've removed this task:";
-    private static final String TASK_DONE_MESSAGE = "Nice! I've marked this task as done:";
-    private static final String TASK_UNDONE_MESSAGE = "OK, I've marked this task as not done yet:";
+    private static final String TASK_REMOVED_MESSAGE = "Noted. I've removed this task";
+    private static final String TASK_DONE_MESSAGE = "Nice! I've marked this task as done";
+    private static final String TASK_UNDONE_MESSAGE = "OK, I've marked this task as not done yet";
 
     private static void validateTaskId(int taskId) throws CrayonIllegalArgumentException {
         if (tasks.isEmpty()) {

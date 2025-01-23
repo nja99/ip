@@ -4,10 +4,10 @@ import exceptions.CrayonInvalidFormatException;
 
 public class Event extends Task{
 
-    private String startTime;
-    private String endTime;
+    private final String startTime;
+    private final String endTime;
 
-    private Event(String description, String startTime, String endTime) throws CrayonInvalidFormatException {
+    private Event(String description, String startTime, String endTime) {
         super(description);
         this.startTime = startTime;
         this.endTime = endTime;

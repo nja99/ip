@@ -4,7 +4,7 @@ import exceptions.CrayonInvalidFormatException;
 
 public class Deadline extends Task{
 
-    private String endDate;
+    private final String endDate;
 
     /**
      * Constructs a tasks.Deadline task by parsing the provided description string.
