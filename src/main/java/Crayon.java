@@ -1,17 +1,6 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Crayon {
-
-    private static final String SEPARATOR = "________________________________________";
-    private static final String ASCII_NAME = """
-          ____ ____     _ __   _____  _   _
-         / ___|  _ \\   / \\\\ \\ / / _ \\| \\ | |
-        | |   | |_) | / _ \\\\ V | | | |  \\| |
-        | |___|  _ < / ___ \\| || |_| | |\\  |
-         \\____|_| \\_/_/   \\_|_| \\___/|_| \\_|
-        
-        """;
 
     public static void main(String[] args) {
         greetUser();
@@ -23,11 +12,11 @@ public class Crayon {
      * Display initial greeting message when Crayon starts up.
      */
     private static void greetUser() {
-        String message = SEPARATOR + "\n"
+        String message = Constants.SEPARATOR + "\n"
                 + "Hello! I'm\n"
-                + ASCII_NAME
+                + Constants.ASCII_NAME
                 + "What can I do for you?\n"
-                + SEPARATOR;
+                + Constants.SEPARATOR + "\n";
 
         System.out.println(message);
     }
@@ -36,9 +25,9 @@ public class Crayon {
      * Display farewell message when the conversation ends.
      */
     private static void sayGoodbye() {
-        String message = SEPARATOR + "\n"
+        String message = Constants.SEPARATOR + "\n"
                 + "Bye. Hope to see you again soon!\n"
-                + SEPARATOR + "\n";
+                + Constants.SEPARATOR + "\n";
 
         System.out.println(message);
     }
@@ -57,10 +46,9 @@ public class Crayon {
                     TaskManager.listTasks();
                 } else {
                     TaskManager.addTask(userInput);
-                    String message = SEPARATOR + "\n"
+                    String message = Constants.SEPARATOR + "\n"
                             + "added: " + userInput +  "\n"
-                            + SEPARATOR + "\n";
-
+                            + Constants.SEPARATOR + "\n";
                     System.out.println(message);
                 }
             }
