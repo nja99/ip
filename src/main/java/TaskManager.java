@@ -6,20 +6,19 @@ import java.util.ArrayList;
 public class TaskManager {
 
     private static final ArrayList<Task> tasks = new ArrayList<>();
+    private static final String TASK_ADDED_MESSAGE = "Got it. I've added this task";
+    private static final String TASK_REMOVED_MESSAGE = "Noted. I've removed this task:";
+    private static final String TASK_DONE_MESSAGE = "Nice! I've marked this task as done:";
+    private static final String TASK_UNDONE_MESSAGE = "OK, I've marked this task as not done yet:";
 
-    /**
-     * Add to list of tasks
-     * @param taskDescription task to be added to the list
-     */
-    public static void addTask(Task taskDescription) {
-        tasks.add(taskDescription);
+    private static void validateTaskId(int taskId) throws CrayonIllegalArgumentException {
+        if (tasks.isEmpty()) {
+            throw new CrayonIllegalArgumentException("No tasks available to perform this action.");
+        }
 
-        StringBuilder sb = new StringBuilder(Constants.SEPARATOR);
-        sb.append("Got it. I've added this task:\n    ");
-        sb.append(taskDescription).append("\n");
-        sb.append("Now you have ").append(tasks.size()).append(" tasks in the list\n");
-        sb.append(Constants.SEPARATOR);
-        System.out.println(sb);
+        if (taskId < 1 || taskId >= tasks.size() + 1) {
+            throw new CrayonIllegalArgumentException("Invalid TaskID! Please enter a number between 1 - " + (tasks.size() + 1));
+        }
     }
 
     /**
@@ -38,30 +37,56 @@ public class TaskManager {
         System.out.println(sb);
     }
 
+    /**
+     * Add to list of tasks
+     * @param taskDescription task to be added to the list
+     */
+    public static void addTask(Task taskDescription) {
+        tasks.add(taskDescription);
+        taskAction(taskDescription, TASK_ADDED_MESSAGE);
+    }
+
+    public static void deleteTask(int taskId) throws CrayonIllegalArgumentException {
+
+        validateTaskId(taskId);
+
+        Task task = tasks.get(taskId - 1);
+        tasks.remove(taskId - 1);
+        taskAction(task, TASK_REMOVED_MESSAGE);
+
+    }
+
     public static void markTaskAsDone(int taskId) throws CrayonIllegalArgumentException {
-        if(taskId < 1 || taskId >= tasks.size() + 1) {
-            throw new CrayonIllegalArgumentException("Invalid TaskID! Please a number between 1 - " + (tasks.size() + 1));
-        }
+        validateTaskId(taskId);
 
         Task task = tasks.get(taskId - 1);
         task.markDone();
-        printAction(task, "Nice! I've marked this task as done:");
+
+        statusAction(task, TASK_DONE_MESSAGE);
     }
 
     public static void markTaskAsUndone (int taskId) throws CrayonIllegalArgumentException {
-        if(taskId < 1 || taskId >= tasks.size() + 1) {
-            throw new CrayonIllegalArgumentException("Invalid TaskID! Please a number between 1 - " + (tasks.size() + 1));
-        }
+        validateTaskId(taskId);
 
         Task task = tasks.get(taskId - 1);
         task.markUndone();
-        printAction(task, "OK, I've marked this task as not done yet:");
+
+        statusAction(task, TASK_UNDONE_MESSAGE);
     }
 
-    private static void printAction(Task task, String message) {
+    private static void statusAction(Task task, String message) {
         StringBuilder sb = new StringBuilder(Constants.SEPARATOR);
         sb.append(message).append("\n    ");
         sb.append(task).append("\n");
+        sb.append(Constants.SEPARATOR);
+        System.out.println(sb);
+    }
+
+    private static void taskAction(Task task, String message) {
+        StringBuilder sb = new StringBuilder(Constants.SEPARATOR);
+        sb.append(message).append("\n    ");
+        sb.append(task).append("\n");
+        sb.append("Now you have ").append(tasks.size()).append(" tasks in the list\n");
         sb.append(Constants.SEPARATOR);
         System.out.println(sb);
     }

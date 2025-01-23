@@ -1,4 +1,3 @@
-import exceptions.CrayonIllegalArgumentException;
 import exceptions.CrayonUnsupportedTaskException;
 import tasks.*;
 
@@ -61,6 +60,9 @@ public class Crayon {
                             break;
                         case "event":
                             TaskManager.addTask(Event.createEventTask(taskDescription));
+                            break;
+                        case "delete":
+                            TaskManager.deleteTask(Integer.parseInt(args[1]));
                             break;
                         case "mark":
                             TaskManager.markTaskAsDone(Integer.parseInt(args[1]));
