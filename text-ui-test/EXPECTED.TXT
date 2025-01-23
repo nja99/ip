@@ -10,19 +10,19 @@ What can I do for you?
 ________________________________________
 
 ________________________________________
-Got it. I've added this task:
+Got it. I've added this task
     [T][ ] Homework
 Now you have 1 tasks in the list
 ________________________________________
 
 ________________________________________
-Got it. I've added this task:
+Got it. I've added this task
     [D][ ] Assignment (by: Friday 16:00)
 Now you have 2 tasks in the list
 ________________________________________
 
 ________________________________________
-Got it. I've added this task:
+Got it. I've added this task
     [E][ ] Career Fair (from: 22 Jan 12:00 to: 23 Jan 17:00)
 Now you have 3 tasks in the list
 ________________________________________
@@ -35,12 +35,12 @@ Here are the tasks in your list:
 ________________________________________
 
 ________________________________________
-Nice! I've marked this task as done:
+Nice! I've marked this task as done
     [T][X] Homework
 ________________________________________
 
 ________________________________________
-Nice! I've marked this task as done:
+Nice! I've marked this task as done
     [D][X] Assignment (by: Friday 16:00)
 ________________________________________
 
@@ -52,7 +52,7 @@ Here are the tasks in your list:
 ________________________________________
 
 ________________________________________
-OK, I've marked this task as not done yet:
+OK, I've marked this task as not done yet
     [T][ ] Homework
 ________________________________________
 

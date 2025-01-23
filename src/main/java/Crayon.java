@@ -1,5 +1,6 @@
+import enums.Action;
+import enums.TaskType;
 import exceptions.CrayonUnsupportedTaskException;
-import tasks.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -45,32 +46,34 @@ public class Crayon {
                 String[] args = userInput.split(" ", 2);
                 String taskDescription = "";
 
-                if(args.length > 1) taskDescription = args[1].trim();
+                if (args.length > 1) taskDescription = args[1].trim();
 
                 try {
-                    switch (args[0]) {
-                        case "list":
+                    Action action = Action.fromString(args[0]);
+
+                    switch (action) {
+                        case LIST:
                             TaskManager.listTasks();
                             break;
-                        case "todo":
-                            TaskManager.addTask(ToDo.createToDoTask(taskDescription));
+                        case TODO:
+                            TaskManager.createTask(TaskType.TODO, taskDescription);
                             break;
-                        case "deadline":
-                            TaskManager.addTask(Deadline.createDeadlineTask(taskDescription));
+                        case DEADLINE:
+                            TaskManager.createTask(TaskType.DEADLINE, taskDescription);
                             break;
-                        case "event":
-                            TaskManager.addTask(Event.createEventTask(taskDescription));
+                        case EVENT:
+                            TaskManager.createTask(TaskType.EVENT, taskDescription);
                             break;
-                        case "delete":
+                        case DELETE:
                             TaskManager.deleteTask(Integer.parseInt(args[1]));
                             break;
-                        case "mark":
+                        case MARK:
                             TaskManager.markTaskAsDone(Integer.parseInt(args[1]));
                             break;
-                        case "unmark":
+                        case UNMARK:
                             TaskManager.markTaskAsUndone(Integer.parseInt(args[1]));
                             break;
-                        case "bye":
+                        case BYE:
                             sayGoodbye();
                             break;
                         default:
