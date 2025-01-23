@@ -1,5 +1,7 @@
 package tasks;
 
+import exceptions.CrayonInvalidFormatException;
+
 public class Deadline extends Task{
 
     private String endDate;
@@ -10,18 +12,22 @@ public class Deadline extends Task{
      *
      * @param description The description string containing the task and deadline.
      */
-    public Deadline(String description) {
+    private Deadline(String description, String endDate){
         super(description);
-        parse(description);
+        this.endDate = endDate;
     }
 
-    @Override
-    public void parse(String description) {
-        String[] parts = description.split(" /by ");
-        if(parts.length == 2) {
-            this.description = parts[0].trim();
-            this.endDate = parts[1].trim();
+    public static Deadline createDeadlineTask(String description) throws CrayonInvalidFormatException {
+        if (description == null || description.trim().isEmpty()) {
+            throw new CrayonInvalidFormatException("Deadline description cannot be empty");
         }
+
+        String[] parts = description.split(" /by ");
+        if (parts.length != 2) {
+            throw new CrayonInvalidFormatException("Use: <task> /by <endDate>");
+        }
+
+        return new Deadline(parts[0].trim(), parts[1].trim());
     }
 
     @Override

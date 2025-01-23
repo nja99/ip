@@ -1,9 +1,18 @@
 package tasks;
 
+import exceptions.CrayonInvalidFormatException;
+
 public class ToDo extends Task{
 
-    public ToDo(String description) {
+    private ToDo(String description) {
         super(description);
+    }
+
+    public static ToDo createToDoTask(String description) throws CrayonInvalidFormatException{
+        if (description == null || description.trim().isEmpty()) {
+            throw new CrayonInvalidFormatException("ToDo description cannot be empty");
+        }
+        return new ToDo(description);
     }
 
     @Override

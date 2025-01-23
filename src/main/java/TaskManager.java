@@ -1,3 +1,4 @@
+import exceptions.CrayonIllegalArgumentException;
 import tasks.Task;
 
 import java.util.ArrayList;
@@ -37,33 +38,29 @@ public class TaskManager {
         System.out.println(sb);
     }
 
-    public static void markTaskAsDone(int taskId) {
+    public static void markTaskAsDone(int taskId) throws CrayonIllegalArgumentException {
         if(taskId < 1 || taskId >= tasks.size() + 1) {
-            System.out.println("Invalid task id: " + taskId);
-            return;
+            throw new CrayonIllegalArgumentException("Invalid TaskID! Please a number between 1 - " + (tasks.size() + 1));
         }
 
         Task task = tasks.get(taskId - 1);
         task.markDone();
-
-        StringBuilder sb = new StringBuilder(Constants.SEPARATOR);
-        sb.append("Nice! I've marked this task as done:\n    ");
-        sb.append(task).append("\n");
-        sb.append(Constants.SEPARATOR);
-        System.out.println(sb);
+        printAction(task, "Nice! I've marked this task as done:");
     }
 
-    public static void markTaskAsUndone(int taskId) {
+    public static void markTaskAsUndone (int taskId) throws CrayonIllegalArgumentException {
         if(taskId < 1 || taskId >= tasks.size() + 1) {
-            System.out.println("Invalid task id: " + taskId);
-            return;
+            throw new CrayonIllegalArgumentException("Invalid TaskID! Please a number between 1 - " + (tasks.size() + 1));
         }
 
         Task task = tasks.get(taskId - 1);
         task.markUndone();
+        printAction(task, "OK, I've marked this task as not done yet:");
+    }
 
+    private static void printAction(Task task, String message) {
         StringBuilder sb = new StringBuilder(Constants.SEPARATOR);
-        sb.append("OK, I've marked this task as not done yet:\n    ");
+        sb.append(message).append("\n    ");
         sb.append(task).append("\n");
         sb.append(Constants.SEPARATOR);
         System.out.println(sb);

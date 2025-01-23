@@ -1,6 +1,6 @@
 package tasks;
 
-public abstract class Task {
+public class Task {
     protected String description;
     private boolean isDone;
 
@@ -30,9 +30,5 @@ public abstract class Task {
     @Override
     public String toString() {
         return (isDone ? "[X] " : "[ ] ") + description;
-    }
-
-    public void parse(String description) {
-        this.description = description.trim();
     }
 }

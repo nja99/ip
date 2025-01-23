@@ -1,6 +1,6 @@
-import tasks.Deadline;
-import tasks.Event;
-import tasks.ToDo;
+import exceptions.CrayonIllegalArgumentException;
+import exceptions.CrayonUnsupportedTaskException;
+import tasks.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -48,30 +48,34 @@ public class Crayon {
 
                 if(args.length > 1) taskDescription = args[1].trim();
 
-                switch (args[0]) {
-                    case "list":
-                        TaskManager.listTasks();
-                        break;
-                    case "todo":
-                        TaskManager.addTask(new ToDo(taskDescription));
-                        break;
-                    case "deadline":
-                        TaskManager.addTask(new Deadline(taskDescription));
-                        break;
-                    case "event":
-                        TaskManager.addTask(new Event(taskDescription));
-                        break;
-                    case "mark":
-                        TaskManager.markTaskAsDone(Integer.parseInt(args[1]));
-                        break;
-                    case "unmark":
-                        TaskManager.markTaskAsUndone(Integer.parseInt(args[1]));
-                        break;
-                    case "bye":
-                        sayGoodbye();
-                        break;
-                    default:
-                        break;
+                try {
+                    switch (args[0]) {
+                        case "list":
+                            TaskManager.listTasks();
+                            break;
+                        case "todo":
+                            TaskManager.addTask(ToDo.createToDoTask(taskDescription));
+                            break;
+                        case "deadline":
+                            TaskManager.addTask(Deadline.createDeadlineTask(taskDescription));
+                            break;
+                        case "event":
+                            TaskManager.addTask(Event.createEventTask(taskDescription));
+                            break;
+                        case "mark":
+                            TaskManager.markTaskAsDone(Integer.parseInt(args[1]));
+                            break;
+                        case "unmark":
+                            TaskManager.markTaskAsUndone(Integer.parseInt(args[1]));
+                            break;
+                        case "bye":
+                            sayGoodbye();
+                            break;
+                        default:
+                            throw new CrayonUnsupportedTaskException();
+                    }
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
                 }
             }
         } catch (IOException e) {
