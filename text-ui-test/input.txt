@@ -1,0 +1,10 @@
+todo Homework
+deadline Assignment /by Friday 16:00
+event Career Fair /from 22 Jan 12:00 /to 23 Jan 17:00
+list
+mark 1
+mark 2
+list
+unmark 1
+list
+bye

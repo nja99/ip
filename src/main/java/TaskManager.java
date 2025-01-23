@@ -28,9 +28,9 @@ public class TaskManager {
         int counter = 1;
 
         StringBuilder sb = new StringBuilder(Constants.SEPARATOR);
-        sb.append("Here are the tasks in your list:\n    ");
+        sb.append("Here are the tasks in your list:\n");
         for(Task task : tasks) {
-            sb.append(counter).append(".").append(task).append("\n");
+            sb.append("    ").append(counter).append(".").append(task).append("\n");
             counter++;
         }
         sb.append(Constants.SEPARATOR);
