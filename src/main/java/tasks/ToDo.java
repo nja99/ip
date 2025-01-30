@@ -8,6 +8,10 @@ public class ToDo extends Task{
         super(description);
     }
 
+    private ToDo(String description, boolean isDone) {
+        super(description, isDone);
+    }
+
     public static ToDo createToDoTask(String description) throws CrayonInvalidFormatException{
         if (description == null || description.trim().isEmpty()) {
             throw new CrayonInvalidFormatException("ToDo description cannot be empty");
@@ -15,9 +19,15 @@ public class ToDo extends Task{
         return new ToDo(description);
     }
 
+    public static ToDo createToDoFromCSV(String[] values) {
+        String description = values[1].trim();
+        boolean isDone = Boolean.parseBoolean(values[2].trim());
+        return new ToDo(description, isDone);
+    }
+
     @Override
     public String getType() {
-        return "TODO";
+        return "todo";
     }
 
     @Override

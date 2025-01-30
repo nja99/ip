@@ -24,6 +24,13 @@ public class Crayon {
                 + Constants.SEPARATOR;
 
         System.out.println(message);
+
+        try {
+            TaskManager.readTasksFromCSV();
+            System.out.println("Tasks have been loaded from tasks.csv\n");
+        } catch (IOException e) {
+            System.out.println("Error loading tasks: " + e.getMessage());
+        }
     }
 
     // Display farewell message when the conversation ends.

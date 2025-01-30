@@ -6,10 +6,11 @@ import tasks.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TaskManager {
 
-    private static final ArrayList<Task> tasks = new ArrayList<>();
+    private static final List<Task> tasks = new ArrayList<>();
     private static final String DEFAULT_PATH = "./data/tasks.csv";
     private static final String[] DEFAULT_HEADER = {"task", "isDone", "description", "startDate", "endDate"};
 
@@ -47,10 +48,16 @@ public class TaskManager {
         }
     }
 
-
     public static void writeTasksToCSV() throws IOException {
         CSVWriter writer = new CSVWriter(DEFAULT_PATH);
         writer.writeToCSV(DEFAULT_HEADER, tasks);
+    }
+
+    public static void readTasksFromCSV() throws IOException {
+        CSVReader reader = new CSVReader(DEFAULT_PATH);
+        List<Task> loadedTask = reader.readFromCSV();
+        tasks.clear();
+        tasks.addAll(loadedTask);
     }
 
     /**

@@ -17,6 +17,11 @@ public class Deadline extends Task{
         this.endDate = endDate;
     }
 
+    private Deadline(String description, boolean isDone, String endDate){
+        super(description, isDone);
+        this.endDate = endDate;
+    }
+
     public static Deadline createDeadlineTask(String description) throws CrayonInvalidFormatException {
         if (description == null || description.trim().isEmpty()) {
             throw new CrayonInvalidFormatException("Deadline description cannot be empty");
@@ -30,9 +35,17 @@ public class Deadline extends Task{
         return new Deadline(parts[0].trim(), parts[1].trim());
     }
 
+    public static Deadline createDeadlineFromCSV(String[] values) {
+        String description = values[1].trim();
+        boolean isDone = Boolean.parseBoolean(values[2].trim());
+        String endDate = values[4].trim();
+
+        return new Deadline(description, isDone, endDate);
+    }
+
     @Override
     public String getType() {
-        return "DEADLINE";
+        return "deadline";
     }
 
     @Override

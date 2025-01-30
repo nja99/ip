@@ -13,6 +13,12 @@ public class Event extends Task{
         this.endDate = endDate;
     }
 
+    private Event(String description, boolean isDone, String startDate, String endDate) {
+        super(description, isDone);
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
     public static Event createEventTask(String description) throws CrayonInvalidFormatException {
         if (description == null || description.trim().isEmpty()) {
             throw new CrayonInvalidFormatException("Event description cannot be empty");
@@ -31,9 +37,18 @@ public class Event extends Task{
         return new Event(taskDescription, timeParts[0].trim(), timeParts[1].trim());
     }
 
+    public static Event createEventFromCSV(String[] values) {
+        String description = values[1].trim();
+        boolean isDone = Boolean.parseBoolean(values[2].trim());
+        String startDate = values[3].trim();
+        String endDate = values[4].trim();
+
+        return new Event(description, isDone, startDate, endDate);
+    }
+
     @Override
     public String getType() {
-        return "EVENT";
+        return "event";
     }
 
     @Override
