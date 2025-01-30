@@ -4,11 +4,16 @@ import exceptions.CrayonIllegalArgumentException;
 import exceptions.CrayonInvalidFormatException;
 import tasks.*;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class TaskManager {
 
     private static final ArrayList<Task> tasks = new ArrayList<>();
+    private static final String DEFAULT_PATH = "./data/tasks.csv";
+    private static final String[] DEFAULT_HEADER = {"task", "isDone", "description", "startDate", "endDate"};
+
     private static final String TASK_ADDED_MESSAGE = "Got it. I've added this task";
     private static final String TASK_REMOVED_MESSAGE = "Noted. I've removed this task";
     private static final String TASK_DONE_MESSAGE = "Nice! I've marked this task as done";
@@ -41,6 +46,12 @@ public class TaskManager {
         } catch (CrayonInvalidFormatException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+
+    public static void writeTasksToCSV() throws IOException {
+        CSVWriter writer = new CSVWriter(DEFAULT_PATH);
+        writer.writeToCSV(DEFAULT_HEADER, tasks);
     }
 
     /**

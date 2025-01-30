@@ -35,6 +35,13 @@ public class Crayon {
                 + Constants.SEPARATOR;
 
         System.out.println(message);
+
+        try {
+            TaskManager.writeTasksToCSV();
+            System.out.println("Tasks have been saved to tasks.csv");
+        } catch (IOException e) {
+            System.out.println("Error saving tasks: " + e.getMessage());
+        }
     }
 
     // Echoes the user message back.
@@ -52,32 +59,30 @@ public class Crayon {
                     Action action = Action.fromString(args[0]);
 
                     switch (action) {
-                        case LIST:
-                            TaskManager.listTasks();
-                            break;
-                        case TODO:
-                            TaskManager.createTask(TaskType.TODO, taskDescription);
-                            break;
-                        case DEADLINE:
-                            TaskManager.createTask(TaskType.DEADLINE, taskDescription);
-                            break;
-                        case EVENT:
-                            TaskManager.createTask(TaskType.EVENT, taskDescription);
-                            break;
-                        case DELETE:
-                            TaskManager.deleteTask(Integer.parseInt(args[1]));
-                            break;
-                        case MARK:
-                            TaskManager.markTaskAsDone(Integer.parseInt(args[1]));
-                            break;
-                        case UNMARK:
-                            TaskManager.markTaskAsUndone(Integer.parseInt(args[1]));
-                            break;
-                        case BYE:
-                            sayGoodbye();
-                            break;
-                        default:
-                            throw new CrayonUnsupportedTaskException();
+                    case LIST:
+                        TaskManager.listTasks();
+                        break;
+                    case TODO:
+                    case DEADLINE:
+                    case EVENT:
+                        TaskType taskType = TaskType.fromString(args[0]);
+                        TaskManager.createTask(taskType, taskDescription);
+                        break;
+                    case DELETE:
+                        TaskManager.deleteTask(Integer.parseInt(args[1]));
+                        break;
+                    case MARK:
+                        TaskManager.markTaskAsDone(Integer.parseInt(args[1]));
+                        break;
+                    case UNMARK:
+                        TaskManager.markTaskAsUndone(Integer.parseInt(args[1]));
+                        break;
+                    case BYE:
+                        sayGoodbye();
+
+                        break;
+                    default:
+                        throw new CrayonUnsupportedTaskException();
                     }
                 } catch (Exception e) {
                     System.out.println(e.getMessage());

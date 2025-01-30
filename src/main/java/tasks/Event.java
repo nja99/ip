@@ -4,13 +4,13 @@ import exceptions.CrayonInvalidFormatException;
 
 public class Event extends Task{
 
-    private final String startTime;
-    private final String endTime;
+    private final String startDate;
+    private final String endDate;
 
-    private Event(String description, String startTime, String endTime) {
+    private Event(String description, String startDate, String endDate) {
         super(description);
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     public static Event createEventTask(String description) throws CrayonInvalidFormatException {
@@ -32,7 +32,17 @@ public class Event extends Task{
     }
 
     @Override
+    public String getType() {
+        return "EVENT";
+    }
+
+    @Override
+    public String[] toCSVRow() {
+        return new String[]{getType(), String.valueOf(isDone), description, startDate, endDate};
+    }
+
+    @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + startTime + " to: " + endTime + ")";
+        return "[E]" + super.toString() + " (from: " + startDate + " to: " + endDate + ")";
     }
 }

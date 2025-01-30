@@ -16,6 +16,16 @@ public class ToDo extends Task{
     }
 
     @Override
+    public String getType() {
+        return "TODO";
+    }
+
+    @Override
+    public String[] toCSVRow() {
+            return new String[]{getType(), String.valueOf(isDone), description, "", ""};
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }

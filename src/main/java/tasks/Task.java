@@ -1,8 +1,10 @@
 package tasks;
 
-public class Task {
+import java.io.IOException;
+
+public abstract class Task {
     protected String description;
-    private boolean isDone;
+    protected boolean isDone;
 
     /**
      * Create a new task with the specified description
@@ -31,4 +33,7 @@ public class Task {
     public String toString() {
         return (isDone ? "[X] " : "[ ] ") + description;
     }
+
+    public abstract String[] toCSVRow();
+    public abstract String getType();
 }

@@ -31,6 +31,16 @@ public class Deadline extends Task{
     }
 
     @Override
+    public String getType() {
+        return "DEADLINE";
+    }
+
+    @Override
+    public String[] toCSVRow() {
+        return new String[]{getType(), String.valueOf(isDone), description, "", endDate};
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + endDate + ")";
     }
