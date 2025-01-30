@@ -28,27 +28,25 @@ public class Crayon {
     }
 
     public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while(!isExit) {
-            try {
-                String userCommand = ui.readUserCommand();
-                Command command = Parser.parseCommand(userCommand);
-                if(command != null) {
-                    command.execute(storage, ui, taskList);
-                    isExit = command.exitRequested();
+        try (Ui autoCloseUi = this.ui) {  // This will automatically close the UI when exiting the try block
+            autoCloseUi.showWelcome();
+            boolean isExit = false;
+            while (!isExit) {
+                try {
+                    String userCommand = autoCloseUi.readUserCommand();
+                    Command command = Parser.parseCommand(userCommand);
+                    if (command != null) {
+                        command.execute(storage, autoCloseUi, taskList);
+                        isExit = command.exitRequested();
+                    }
+                } catch (IOException e) {
+                    autoCloseUi.showErrorMessage("IO error: " + e.getMessage());
+                } catch (CrayonException e) {
+                    autoCloseUi.showErrorMessage(e.getMessage());
                 }
-            } catch (IOException e) {
-                ui.showErrorMessage("Error reading user command: " + e.getMessage());
-            } catch (CrayonException e) {
-                ui.showErrorMessage(e.getMessage());
             }
-        }
-
-        try {
-            ui.closeUi();
-        } catch(IOException e) {
-            ui.showErrorMessage("Error closing ui: " + e.getMessage());
+        } catch (Exception e) {
+            ui.showErrorMessage("Error closing UI: " + e.getMessage());
         }
     }
 }

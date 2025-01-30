@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Ui {
+public class Ui implements AutoCloseable {
 
     private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -37,10 +37,12 @@ public class Ui {
         showMessage("Bye. Hope to see you again soon!\n");
     }
 
+    // Further Implementation to be Added
     public void showTaskAction(String message) {
         showMessage(message);
     }
 
+    // Further Implementation to be Added
     public void showStatusAction(String message) {
         showMessage(message);
     }
@@ -49,7 +51,8 @@ public class Ui {
         return br.readLine();
     }
 
-    public void closeUi() throws IOException {
+    @Override
+    public void close() throws IOException {
         br.close();
     }
 }
