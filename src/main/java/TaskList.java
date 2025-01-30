@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TaskManager {
+public class TaskList {
 
     private static final List<Task> tasks = new ArrayList<>();
     private static final String DEFAULT_PATH = "./data/tasks.csv";
