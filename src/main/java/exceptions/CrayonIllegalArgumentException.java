@@ -1,6 +1,6 @@
 package exceptions;
 
-public class CrayonIllegalArgumentException extends Exception {
+public class CrayonIllegalArgumentException extends CrayonException {
 
     public CrayonIllegalArgumentException(String message) {
         super(message);
