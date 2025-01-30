@@ -25,17 +25,17 @@ public class Event extends Task{
 
     public static Event createEventTask(String description) throws CrayonInvalidFormatException {
         if (description == null || description.trim().isEmpty()) {
-            throw new CrayonInvalidFormatException("Event description cannot be empty");
+            throw new CrayonInvalidFormatException("Event description cannot be empty\n");
         }
 
         String[] parts = description.split(" /from ");
         if (parts.length != 2) {
-            throw new CrayonInvalidFormatException("Use: <task> /from <start datetime> /to <end datetime>");
+            throw new CrayonInvalidFormatException("Use: <task> /from <start datetime> /to <end datetime>\n");
         }
 
         String[] timeParts = parts[1].split(" /to ");
         if (timeParts.length != 2) {
-            throw new CrayonInvalidFormatException("Use: <task> /from <start datetime> /to <end datetime>");
+            throw new CrayonInvalidFormatException("Use: <task> /from <start datetime> /to <end datetime>\n");
         }
 
         String taskDescription = parts[0].trim();

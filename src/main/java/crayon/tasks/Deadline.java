@@ -27,12 +27,12 @@ public class Deadline extends Task{
 
     public static Deadline createDeadlineTask(String description) throws CrayonInvalidFormatException {
         if (description == null || description.trim().isEmpty()) {
-            throw new CrayonInvalidFormatException("Deadline description cannot be empty");
+            throw new CrayonInvalidFormatException("Deadline description cannot be empty\n");
         }
 
         String[] parts = description.split(" /by ");
         if (parts.length != 2) {
-            throw new CrayonInvalidFormatException("Use: <task> /by <endDate>");
+            throw new CrayonInvalidFormatException("Use: <task> /by <endDate>\n");
         }
 
         String taskDescription = parts[0].trim();

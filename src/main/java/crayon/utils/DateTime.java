@@ -17,12 +17,12 @@ public class DateTime {
             LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, FORMATTER);
 
             if (dateTime.isBefore(LocalDateTime.now()) && checkBefore) {
-                throw new CrayonInvalidDateTimeException("The deadline must be in the future.");
+                throw new CrayonInvalidDateTimeException("The deadline must be in the future.\n");
             }
 
             return dateTime;
         } catch (DateTimeParseException e) {
-            throw new CrayonInvalidDateTimeException("Use d/M/yyyy HHmm to convert the date/time string to a valid date.");
+            throw new CrayonInvalidDateTimeException("Use d/M/yyyy HHmm to convert the date/time string to a valid date.\n");
         }
     }
 
