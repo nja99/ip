@@ -1,19 +1,23 @@
 package tasks;
 
+import exceptions.CrayonInvalidDateTimeException;
 import exceptions.CrayonInvalidFormatException;
+import utils.DateTime;
+
+import java.time.LocalDateTime;
 
 public class Event extends Task{
 
-    private final String startDate;
-    private final String endDate;
+    private final LocalDateTime startDate;
+    private final LocalDateTime endDate;
 
-    private Event(String description, String startDate, String endDate) {
+    private Event(String description, LocalDateTime startDate, LocalDateTime endDate) {
         super(description);
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
-    private Event(String description, boolean isDone, String startDate, String endDate) {
+    private Event(String description, boolean isDone, LocalDateTime startDate, LocalDateTime endDate) {
         super(description, isDone);
         this.startDate = startDate;
         this.endDate = endDate;
@@ -29,21 +33,25 @@ public class Event extends Task{
             throw new CrayonInvalidFormatException("Use: <task> /from <start datetime> /to <end datetime>");
         }
 
-        String taskDescription = parts[0].trim();
         String[] timeParts = parts[1].split(" /to ");
         if (timeParts.length != 2) {
             throw new CrayonInvalidFormatException("Use: <task> /from <start datetime> /to <end datetime>");
         }
-        return new Event(taskDescription, timeParts[0].trim(), timeParts[1].trim());
+
+        String taskDescription = parts[0].trim();
+        LocalDateTime startDate = DateTime.stringToDateTime(timeParts[0].trim(), false);
+        LocalDateTime endDate = DateTime.stringToDateTime(timeParts[1].trim(), true);
+
+        return new Event(taskDescription, startDate, endDate);
     }
 
-    public static Event createEventFromCSV(String[] values) {
+    public static Event createEventFromCSV(String[] values) throws CrayonInvalidDateTimeException {
         boolean isDone = Boolean.parseBoolean(values[1].trim());
-        String description = values[2].trim();
-        String startDate = values[3].trim();
-        String endDate = values[4].trim();
+        String taskDescription = values[2].trim();
+        LocalDateTime startDate = DateTime.parseStoredDateTime(values[3].trim());
+        LocalDateTime endDate = DateTime.parseStoredDateTime(values[4].trim());
 
-        return new Event(description, isDone, startDate, endDate);
+        return new Event(taskDescription, isDone, startDate, endDate);
     }
 
     @Override
@@ -53,11 +61,11 @@ public class Event extends Task{
 
     @Override
     public String[] toCSVRow() {
-        return new String[]{getType(), String.valueOf(isDone), description, startDate, endDate};
+        return new String[]{getType(), String.valueOf(isDone), description, startDate.toString(), endDate.toString()};
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + startDate + " to: " + endDate + ")";
+        return "[E]" + super.toString() + " (from: " + DateTime.dateTimeToString(startDate) + " to: " + DateTime.dateTimeToString(endDate) + ")";
     }
 }

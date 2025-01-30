@@ -1,10 +1,14 @@
 package tasks;
 
 import exceptions.CrayonInvalidFormatException;
+import utils.DateTime;
+
+import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Deadline extends Task{
 
-    private final String endDate;
+    private final LocalDateTime endDate;
 
     /**
      * Constructs a tasks.Deadline task by parsing the provided description string.
@@ -12,12 +16,12 @@ public class Deadline extends Task{
      *
      * @param description The description string containing the task and deadline.
      */
-    private Deadline(String description, String endDate){
+    private Deadline(String description, LocalDateTime endDate){
         super(description);
         this.endDate = endDate;
     }
 
-    private Deadline(String description, boolean isDone, String endDate){
+    private Deadline(String description, boolean isDone, LocalDateTime endDate){
         super(description, isDone);
         this.endDate = endDate;
     }
@@ -32,15 +36,18 @@ public class Deadline extends Task{
             throw new CrayonInvalidFormatException("Use: <task> /by <endDate>");
         }
 
-        return new Deadline(parts[0].trim(), parts[1].trim());
+        String taskDescription = parts[0].trim();
+        LocalDateTime endDate = DateTime.stringToDateTime(parts[1].trim(),true);
+
+        return new Deadline(taskDescription, endDate);
     }
 
-    public static Deadline createDeadlineFromCSV(String[] values) {
+    public static Deadline createDeadlineFromCSV(String[] values) throws CrayonInvalidFormatException {
         boolean isDone = Boolean.parseBoolean(values[1].trim());
-        String description = values[2].trim();
-        String endDate = values[4].trim();
+        String taskDescription = values[2].trim();
+        LocalDateTime endDate = DateTime.parseStoredDateTime(values[4].trim());
 
-        return new Deadline(description, isDone, endDate);
+        return new Deadline(taskDescription, isDone, endDate);
     }
 
     @Override
@@ -50,11 +57,11 @@ public class Deadline extends Task{
 
     @Override
     public String[] toCSVRow() {
-        return new String[]{getType(), String.valueOf(isDone), description, "", endDate};
+        return new String[]{getType(), String.valueOf(isDone), description, "", endDate.toString()};
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + endDate + ")";
+        return "[D]" + super.toString() + " (by: " + DateTime.dateTimeToString(endDate) + ")";
     }
 }

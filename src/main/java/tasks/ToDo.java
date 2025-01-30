@@ -21,8 +21,8 @@ public class ToDo extends Task{
 
     public static ToDo createToDoFromCSV(String[] values) {
         boolean isDone = Boolean.parseBoolean(values[1].trim());
-        String description = values[2].trim();
-        return new ToDo(description, isDone);
+        String taskDescription = values[2].trim();
+        return new ToDo(taskDescription, isDone);
     }
 
     @Override
