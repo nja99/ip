@@ -9,61 +9,92 @@ Hello! I'm
 What can I do for you?
 ________________________________________
 
+Error loading tasks: .\data\tasks.csv (The system cannot find the path specified)
 ________________________________________
 Got it. I've added this task
-    [T][ ] Homework
+    [T][ ] Test ToDo #1
 Now you have 1 tasks in the list
 ________________________________________
 
 ________________________________________
 Got it. I've added this task
-    [D][ ] Assignment (by: Friday 16:00)
+    [D][ ] Test Deadline #1 (by: Dec 12 2025 04:00 PM)
 Now you have 2 tasks in the list
 ________________________________________
 
+Invalid Format! The deadline must be in the future.
+Invalid Format! Use d/M/yyyy HHmm to convert the date/time string to a valid date.
 ________________________________________
 Got it. I've added this task
-    [E][ ] Career Fair (from: 22 Jan 12:00 to: 23 Jan 17:00)
+    [E][ ] Test Event #1 (from: Dec 12 2025 06:00 PM to: Dec 12 2025 07:00 PM)
 Now you have 3 tasks in the list
 ________________________________________
 
 ________________________________________
+Got it. I've added this task
+    [E][ ] Test Event #2 (from: Dec 12 2000 04:00 PM to: Dec 12 2025 06:00 PM)
+Now you have 4 tasks in the list
+________________________________________
+
+Invalid Format! The deadline must be in the future.
+Invalid Format! Use d/M/yyyy HHmm to convert the date/time string to a valid date.
+________________________________________
 Here are the tasks in your list:
-    1.[T][ ] Homework
-    2.[D][ ] Assignment (by: Friday 16:00)
-    3.[E][ ] Career Fair (from: 22 Jan 12:00 to: 23 Jan 17:00)
+    1.[T][ ] Test ToDo #1
+    2.[D][ ] Test Deadline #1 (by: Dec 12 2025 04:00 PM)
+    3.[E][ ] Test Event #1 (from: Dec 12 2025 06:00 PM to: Dec 12 2025 07:00 PM)
+    4.[E][ ] Test Event #2 (from: Dec 12 2000 04:00 PM to: Dec 12 2025 06:00 PM)
 ________________________________________
 
 ________________________________________
 Nice! I've marked this task as done
-    [T][X] Homework
+    [T][X] Test ToDo #1
 ________________________________________
 
 ________________________________________
 Nice! I've marked this task as done
-    [D][X] Assignment (by: Friday 16:00)
+    [D][X] Test Deadline #1 (by: Dec 12 2025 04:00 PM)
 ________________________________________
 
+Invalid TaskID! Please enter a number between 1 - 5
 ________________________________________
 Here are the tasks in your list:
-    1.[T][X] Homework
-    2.[D][X] Assignment (by: Friday 16:00)
-    3.[E][ ] Career Fair (from: 22 Jan 12:00 to: 23 Jan 17:00)
+    1.[T][X] Test ToDo #1
+    2.[D][X] Test Deadline #1 (by: Dec 12 2025 04:00 PM)
+    3.[E][ ] Test Event #1 (from: Dec 12 2025 06:00 PM to: Dec 12 2025 07:00 PM)
+    4.[E][ ] Test Event #2 (from: Dec 12 2000 04:00 PM to: Dec 12 2025 06:00 PM)
 ________________________________________
 
 ________________________________________
 OK, I've marked this task as not done yet
-    [T][ ] Homework
+    [T][ ] Test ToDo #1
+________________________________________
+
+Invalid TaskID! Please enter a number between 1 - 5
+________________________________________
+Here are the tasks in your list:
+    1.[T][ ] Test ToDo #1
+    2.[D][X] Test Deadline #1 (by: Dec 12 2025 04:00 PM)
+    3.[E][ ] Test Event #1 (from: Dec 12 2025 06:00 PM to: Dec 12 2025 07:00 PM)
+    4.[E][ ] Test Event #2 (from: Dec 12 2000 04:00 PM to: Dec 12 2025 06:00 PM)
 ________________________________________
 
 ________________________________________
+Noted. I've removed this task
+    [E][ ] Test Event #1 (from: Dec 12 2025 06:00 PM to: Dec 12 2025 07:00 PM)
+Now you have 3 tasks in the list
+________________________________________
+
+Invalid TaskID! Please enter a number between 1 - 4
+________________________________________
 Here are the tasks in your list:
-    1.[T][ ] Homework
-    2.[D][X] Assignment (by: Friday 16:00)
-    3.[E][ ] Career Fair (from: 22 Jan 12:00 to: 23 Jan 17:00)
+    1.[T][ ] Test ToDo #1
+    2.[D][X] Test Deadline #1 (by: Dec 12 2025 04:00 PM)
+    3.[E][ ] Test Event #2 (from: Dec 12 2000 04:00 PM to: Dec 12 2025 06:00 PM)
 ________________________________________
 
 ________________________________________
 Bye. Hope to see you again soon!
 ________________________________________
 
+Tasks have been saved to tasks.csv
