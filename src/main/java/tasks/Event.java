@@ -38,8 +38,8 @@ public class Event extends Task{
     }
 
     public static Event createEventFromCSV(String[] values) {
-        String description = values[1].trim();
-        boolean isDone = Boolean.parseBoolean(values[2].trim());
+        boolean isDone = Boolean.parseBoolean(values[1].trim());
+        String description = values[2].trim();
         String startDate = values[3].trim();
         String endDate = values[4].trim();
 

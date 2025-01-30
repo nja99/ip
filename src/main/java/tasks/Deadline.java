@@ -36,8 +36,8 @@ public class Deadline extends Task{
     }
 
     public static Deadline createDeadlineFromCSV(String[] values) {
-        String description = values[1].trim();
-        boolean isDone = Boolean.parseBoolean(values[2].trim());
+        boolean isDone = Boolean.parseBoolean(values[1].trim());
+        String description = values[2].trim();
         String endDate = values[4].trim();
 
         return new Deadline(description, isDone, endDate);

@@ -20,8 +20,8 @@ public class ToDo extends Task{
     }
 
     public static ToDo createToDoFromCSV(String[] values) {
-        String description = values[1].trim();
-        boolean isDone = Boolean.parseBoolean(values[2].trim());
+        boolean isDone = Boolean.parseBoolean(values[1].trim());
+        String description = values[2].trim();
         return new ToDo(description, isDone);
     }
 
