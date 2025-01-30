@@ -16,6 +16,7 @@ public class UnmarkCommand extends Command {
 
     @Override
     public void execute(Storage storage, Ui ui, TaskList taskList) throws CrayonIllegalArgumentException {
-        taskList.markTaskAsUndone(Integer.parseInt(content));
+        String unmarkMessage = taskList.markTaskAsUndone(Integer.parseInt(content));
+        ui.showStatusAction(unmarkMessage);
     }
 }

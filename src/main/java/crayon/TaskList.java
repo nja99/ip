@@ -34,12 +34,7 @@ public class TaskList {
         }
     }
 
-    /**
-     * Creates a task of the specified type and adds it to the task list.
-     * @param taskType The type of task to create.
-     * @param description A brief description of the task.
-     */
-    public void createTask(TaskType taskType, String description) {
+    public String createTask(TaskType taskType, String description) {
         try {
             Task task = switch (taskType) {
                 case TODO -> ToDo.createToDoTask(description);
@@ -47,9 +42,10 @@ public class TaskList {
                 case EVENT -> Event.createEventTask(description);
             };
 
-            addTask(task);
+            tasks.add(task);
+            return formatTaskAction(task, TASK_ADDED_MESSAGE);
         } catch (CrayonInvalidFormatException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
     }
 
@@ -58,67 +54,54 @@ public class TaskList {
     }
 
     /**
-     * Lists all tasks
+     * Lists all crayon.tasks
      */
-    public void listTasks() {
+    public String listTasks() {
         int counter = 1;
 
         StringBuilder sb = new StringBuilder(Constants.SEPARATOR);
-        sb.append("Here are the tasks in your list:\n");
+        sb.append("Here are the crayon.tasks in your list:\n");
         for(Task task : tasks) {
             sb.append("    ").append(counter).append(".").append(task).append("\n");
             counter++;
         }
         sb.append(Constants.SEPARATOR);
-        System.out.println(sb);
+        return sb.toString();
     }
 
-    private void addTask(Task taskDescription) {
-        tasks.add(taskDescription);
-        printTaskAction(taskDescription, TASK_ADDED_MESSAGE);
-    }
-
-    public void deleteTask(int taskId) throws CrayonIllegalArgumentException {
+    public String deleteTask(int taskId) throws CrayonIllegalArgumentException {
         validateTaskId(taskId);
 
         Task task = tasks.get(taskId - 1);
         tasks.remove(taskId - 1);
-        printTaskAction(task, TASK_REMOVED_MESSAGE);
+        return formatTaskAction(task, TASK_REMOVED_MESSAGE);
 
     }
 
-    public void markTaskAsDone(int taskId) throws CrayonIllegalArgumentException {
+    public String markTaskAsDone(int taskId) throws CrayonIllegalArgumentException {
         validateTaskId(taskId);
 
         Task task = tasks.get(taskId - 1);
         task.markDone();
 
-        printStatusAction(task, TASK_DONE_MESSAGE);
+        return formatStatusAction(task, TASK_DONE_MESSAGE);
     }
 
-    public void markTaskAsUndone (int taskId) throws CrayonIllegalArgumentException {
+    public String markTaskAsUndone (int taskId) throws CrayonIllegalArgumentException {
         validateTaskId(taskId);
 
         Task task = tasks.get(taskId - 1);
         task.markUndone();
 
-        printStatusAction(task, TASK_UNDONE_MESSAGE);
+        return formatStatusAction(task, TASK_UNDONE_MESSAGE);
     }
 
-    private void printStatusAction(Task task, String message) {
-        StringBuilder sb = new StringBuilder(Constants.SEPARATOR);
-        sb.append(message).append("\n    ");
-        sb.append(task).append("\n");
-        sb.append(Constants.SEPARATOR);
-        System.out.println(sb);
+    private String formatStatusAction(Task task, String message) {
+        return message + "\n    " + task + "\n";
     }
 
-    private void printTaskAction(Task task, String message) {
-        StringBuilder sb = new StringBuilder(Constants.SEPARATOR);
-        sb.append(message).append("\n    ");
-        sb.append(task).append("\n");
-        sb.append("Now you have ").append(tasks.size()).append(" tasks in the list\n");
-        sb.append(Constants.SEPARATOR);
-        System.out.println(sb);
+    private String formatTaskAction(Task task, String message) {
+        return message + "\n    " + task + "\n"
+                + "Now you have " + tasks.size() + " tasks in your list\n";
     }
 }

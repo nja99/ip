@@ -17,6 +17,7 @@ public class AddEventCommand extends Command{
 
     @Override
     public void execute(Storage storage, Ui ui, TaskList taskList) {
-        taskList.createTask(TaskType.EVENT, content);
+        String eventMessage = taskList.createTask(TaskType.EVENT, content);
+        ui.showTaskAction(eventMessage);
     }
 }

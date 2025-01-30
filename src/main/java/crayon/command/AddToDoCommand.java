@@ -17,6 +17,7 @@ public class AddToDoCommand extends Command{
 
     @Override
     public void execute(Storage storage, Ui ui, TaskList taskList) {
-        taskList.createTask(TaskType.TODO, content);
+        String todoMessage = taskList.createTask(TaskType.TODO, content);
+        ui.showTaskAction(todoMessage);
     }
 }

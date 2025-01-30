@@ -3,7 +3,8 @@ package crayon;
 public class Constants {
 
     // Define shared constants here
-    public static final String SEPARATOR = "________________________________________\n";
+    public static final String SEPARATOR = "_".repeat(50) + "\n";
+    public static final String ERROR_SEPARATOR = "#".repeat(100) + "\n";
     public static final String ASCII_NAME = """
           ____ ____     _ __   _____  _   _
          / ___|  _ \\   / \\\\ \\ / / _ \\| \\ | |
