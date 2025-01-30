@@ -1,7 +1,17 @@
 package crayon;
 
-import crayon.command.*;
+import crayon.command.Command;
+import crayon.command.ListCommand;
+import crayon.command.AddToDoCommand;
+import crayon.command.AddDeadlineCommand;
+import crayon.command.AddEventCommand;
+import crayon.command.DeleteCommand;
+import crayon.command.MarkCommand;
+import crayon.command.UnmarkCommand;
+import crayon.command.ByeCommand;
+
 import crayon.enums.Action;
+import crayon.exceptions.CrayonUnsupportedTaskException;
 
 public class Parser {
 
@@ -12,7 +22,6 @@ public class Parser {
         if (args.length > 1) content = args[1].trim();
         try {
             Action action = Action.fromString(args[0]);
-            Command command;
             return switch (action) {
                 case LIST -> new ListCommand();
                 case TODO -> new AddToDoCommand(content);
@@ -23,7 +32,7 @@ public class Parser {
                 case UNMARK -> new UnmarkCommand(content);
                 case BYE -> new ByeCommand();
             };
-        } catch (IllegalArgumentException e) {
+        } catch (CrayonUnsupportedTaskException e) {
             System.out.println(e.getMessage());
         }
         return null;

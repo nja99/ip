@@ -1,12 +1,9 @@
 package crayon;
 
-import crayon.enums.Action;
-import crayon.enums.TaskType;
-import crayon.exceptions.CrayonUnsupportedTaskException;
+import crayon.command.Command;
+import crayon.exceptions.CrayonException;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class Crayon {
 
@@ -33,58 +30,25 @@ public class Crayon {
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
-//        while(!isExit) {
-//            try {
-//                String userCommand = ui.readUserCommand();
-//            } catch (IOException e) {
-//                ui.showErrorMessage("Error reading user crayon.command: " + e.getMessage());
-//            }
-//        }
-
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
-            while (!isExit) {
-                String userInput = br.readLine();
-                String[] args = userInput.split(" ", 2);
-                String taskDescription = "";
-
-                if (args.length > 1) taskDescription = args[1].trim();
-
-                try {
-                    Action action = Action.fromString(args[0]);
-
-                    switch (action) {
-                        case LIST:
-                            taskList.listTasks();
-                            break;
-                        case TODO:
-                        case DEADLINE:
-                        case EVENT:
-                            TaskType taskType = TaskType.fromString(args[0]);
-                            taskList.createTask(taskType, taskDescription);
-                            break;
-                        case DELETE:
-                            taskList.deleteTask(Integer.parseInt(args[1]));
-                            break;
-                        case MARK:
-                            taskList.markTaskAsDone(Integer.parseInt(args[1]));
-                            break;
-                        case UNMARK:
-                            taskList.markTaskAsUndone(Integer.parseInt(args[1]));
-                            break;
-                        case BYE:
-                            isExit = true;
-                            ui.showFarewell();
-                            storage.saveTasksToCSV(taskList.getTasks());
-                            break;
-                        default:
-                            throw new CrayonUnsupportedTaskException();
-                    }
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
+        while(!isExit) {
+            try {
+                String userCommand = ui.readUserCommand();
+                Command command = Parser.parseCommand(userCommand);
+                if(command != null) {
+                    command.execute(storage, ui, taskList);
+                    isExit = command.exitRequested();
                 }
+            } catch (IOException e) {
+                ui.showErrorMessage("Error reading user command: " + e.getMessage());
+            } catch (CrayonException e) {
+                ui.showErrorMessage(e.getMessage());
             }
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+        }
+
+        try {
+            ui.closeUi();
+        } catch(IOException e) {
+            ui.showErrorMessage("Error closing ui: " + e.getMessage());
         }
     }
 }

@@ -1,5 +1,7 @@
 package crayon.enums;
 
+import crayon.exceptions.CrayonUnsupportedTaskException;
+
 public enum Action {
     LIST,
     TODO,
@@ -10,7 +12,7 @@ public enum Action {
     UNMARK,
     BYE;
 
-    public static Action fromString(String value) {
+    public static Action fromString(String value) throws CrayonUnsupportedTaskException {
         return switch (value.toLowerCase()) {
             case "list" -> Action.LIST;
             case "todo" -> Action.TODO;
@@ -20,7 +22,7 @@ public enum Action {
             case "mark" -> Action.MARK;
             case "unmark" -> Action.UNMARK;
             case "bye" -> Action.BYE;
-            default -> throw new IllegalArgumentException("Unknown Action: " + value);
+            default -> throw new CrayonUnsupportedTaskException("Unknown Action: " + value);
         };
     }
 }
