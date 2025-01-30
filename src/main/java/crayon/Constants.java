@@ -1,3 +1,5 @@
+package crayon;
+
 public class Constants {
 
     // Define shared constants here

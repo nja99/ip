@@ -1,4 +1,4 @@
-package enums;
+package crayon.enums;
 
 public enum Action {
     LIST,
@@ -20,7 +20,7 @@ public enum Action {
             case "mark" -> Action.MARK;
             case "unmark" -> Action.UNMARK;
             case "bye" -> Action.BYE;
-            default -> throw new IllegalArgumentException("Unknown enums.Action: " + value);
+            default -> throw new IllegalArgumentException("Unknown Action: " + value);
         };
     }
 }

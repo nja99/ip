@@ -1,17 +1,16 @@
-package tasks;
+package crayon.tasks;
 
-import exceptions.CrayonInvalidFormatException;
-import utils.DateTime;
+import crayon.exceptions.CrayonInvalidFormatException;
+import crayon.utils.DateTime;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class Deadline extends Task{
 
     private final LocalDateTime endDate;
 
     /**
-     * Constructs a tasks.Deadline task by parsing the provided description string.
+     * Constructs a Deadline task by parsing the provided description string.
      * The expected format is: <task description> /by <deadline date>.
      *
      * @param description The description string containing the task and deadline.

@@ -1,4 +1,4 @@
-package enums;
+package crayon.enums;
 
 public enum TaskType {
     TODO,
@@ -10,7 +10,7 @@ public enum TaskType {
             case "todo" -> TaskType.TODO;
             case "deadline" -> TaskType.DEADLINE;
             case "event" -> TaskType.EVENT;
-            default -> throw new IllegalArgumentException("Unknown enums.TaskType: " + value);
+            default -> throw new IllegalArgumentException("Unknown TaskType: " + value);
         };
     }
 }

@@ -1,4 +1,4 @@
-package exceptions;
+package crayon.exceptions;
 
 public class CrayonInvalidFormatException extends CrayonException {
 

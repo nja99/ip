@@ -1,4 +1,4 @@
-package utils;
+package crayon.utils;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -14,7 +14,7 @@ public class CSVReader {
         this.filePath = filePath;
     }
 
-    private String[] readHeader() throws IOException {
+    public String[] readHeader() throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String headerLine = br.readLine();
             return headerLine != null ? headerLine.split(",") : null;

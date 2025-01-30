@@ -1,27 +1,30 @@
-import enums.TaskType;
-import exceptions.CrayonInvalidTaskIdException;
-import exceptions.CrayonIllegalArgumentException;
-import exceptions.CrayonInvalidFormatException;
-import tasks.*;
-import utils.CSVReader;
-import utils.CSVWriter;
+package crayon;
 
-import java.io.IOException;
+import crayon.enums.TaskType;
+import crayon.exceptions.CrayonInvalidTaskIdException;
+import crayon.exceptions.CrayonIllegalArgumentException;
+import crayon.exceptions.CrayonInvalidFormatException;
+import crayon.tasks.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
 
-    private static final List<Task> tasks = new ArrayList<>();
-    private static final String DEFAULT_PATH = "./data/tasks.csv";
-    private static final String[] DEFAULT_HEADER = {"task", "isDone", "description", "startDate", "endDate"};
+    private final List<Task> tasks = new ArrayList<>();
 
     private static final String TASK_ADDED_MESSAGE = "Got it. I've added this task";
     private static final String TASK_REMOVED_MESSAGE = "Noted. I've removed this task";
     private static final String TASK_DONE_MESSAGE = "Nice! I've marked this task as done";
     private static final String TASK_UNDONE_MESSAGE = "OK, I've marked this task as not done yet";
 
-    private static void validateTaskId(int taskId) throws CrayonIllegalArgumentException {
+    public TaskList() {}
+
+    public TaskList(List<Task> tasks){
+        this.tasks.addAll(tasks);
+    }
+
+    private void validateTaskId(int taskId) throws CrayonIllegalArgumentException {
         if (tasks.isEmpty()) {
             throw new CrayonIllegalArgumentException("No tasks available to perform this action.");
         }
@@ -36,7 +39,7 @@ public class TaskList {
      * @param taskType The type of task to create.
      * @param description A brief description of the task.
      */
-    public static void createTask(TaskType taskType, String description) {
+    public void createTask(TaskType taskType, String description) {
         try {
             Task task = switch (taskType) {
                 case TODO -> ToDo.createToDoTask(description);
@@ -50,22 +53,14 @@ public class TaskList {
         }
     }
 
-    public static void writeTasksToCSV() throws IOException {
-        CSVWriter writer = new CSVWriter(DEFAULT_PATH);
-        writer.writeToCSV(DEFAULT_HEADER, tasks);
-    }
-
-    public static void readTasksFromCSV() throws IOException {
-        CSVReader reader = new CSVReader(DEFAULT_PATH);
-        List<Task> loadedTask = reader.readFromCSV();
-        tasks.clear();
-        tasks.addAll(loadedTask);
+    public List<Task> getTasks() {
+        return tasks;
     }
 
     /**
      * Lists all tasks
      */
-    public static void listTasks() {
+    public void listTasks() {
         int counter = 1;
 
         StringBuilder sb = new StringBuilder(Constants.SEPARATOR);
@@ -78,12 +73,12 @@ public class TaskList {
         System.out.println(sb);
     }
 
-    private static void addTask(Task taskDescription) {
+    private void addTask(Task taskDescription) {
         tasks.add(taskDescription);
         printTaskAction(taskDescription, TASK_ADDED_MESSAGE);
     }
 
-    public static void deleteTask(int taskId) throws CrayonIllegalArgumentException {
+    public void deleteTask(int taskId) throws CrayonIllegalArgumentException {
         validateTaskId(taskId);
 
         Task task = tasks.get(taskId - 1);
@@ -92,7 +87,7 @@ public class TaskList {
 
     }
 
-    public static void markTaskAsDone(int taskId) throws CrayonIllegalArgumentException {
+    public void markTaskAsDone(int taskId) throws CrayonIllegalArgumentException {
         validateTaskId(taskId);
 
         Task task = tasks.get(taskId - 1);
@@ -101,7 +96,7 @@ public class TaskList {
         printStatusAction(task, TASK_DONE_MESSAGE);
     }
 
-    public static void markTaskAsUndone (int taskId) throws CrayonIllegalArgumentException {
+    public void markTaskAsUndone (int taskId) throws CrayonIllegalArgumentException {
         validateTaskId(taskId);
 
         Task task = tasks.get(taskId - 1);
@@ -110,7 +105,7 @@ public class TaskList {
         printStatusAction(task, TASK_UNDONE_MESSAGE);
     }
 
-    private static void printStatusAction(Task task, String message) {
+    private void printStatusAction(Task task, String message) {
         StringBuilder sb = new StringBuilder(Constants.SEPARATOR);
         sb.append(message).append("\n    ");
         sb.append(task).append("\n");
@@ -118,7 +113,7 @@ public class TaskList {
         System.out.println(sb);
     }
 
-    private static void printTaskAction(Task task, String message) {
+    private void printTaskAction(Task task, String message) {
         StringBuilder sb = new StringBuilder(Constants.SEPARATOR);
         sb.append(message).append("\n    ");
         sb.append(task).append("\n");

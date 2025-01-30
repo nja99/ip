@@ -1,16 +1,18 @@
-import enums.TaskType;
-import exceptions.CrayonInvalidFormatException;
-import tasks.Task;
-import utils.CSVReader;
-import utils.CSVWriter;
+package crayon;
+
+import crayon.enums.TaskType;
+import crayon.exceptions.CrayonInvalidFormatException;
+import crayon.tasks.Task;
+import crayon.utils.CSVReader;
+import crayon.utils.CSVWriter;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static tasks.Deadline.createDeadlineFromCSV;
-import static tasks.Event.createEventFromCSV;
-import static tasks.ToDo.createToDoFromCSV;
+import static crayon.tasks.Deadline.createDeadlineFromCSV;
+import static crayon.tasks.Event.createEventFromCSV;
+import static crayon.tasks.ToDo.createToDoFromCSV;
 
 public class Storage {
 
