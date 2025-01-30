@@ -4,7 +4,6 @@ import exceptions.CrayonIllegalArgumentException;
 import exceptions.CrayonInvalidFormatException;
 import tasks.*;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
