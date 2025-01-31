@@ -1,8 +1,8 @@
 package crayon.command;
 
+import crayon.Storage;
 import crayon.TaskList;
 import crayon.Ui;
-import crayon.Storage;
 import crayon.enums.Action;
 import crayon.exceptions.CrayonException;
 

@@ -2,7 +2,7 @@ package crayon.tasks;
 
 import crayon.exceptions.CrayonInvalidFormatException;
 
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     private ToDo(String description) {
         super(description);
@@ -12,14 +12,14 @@ public class ToDo extends Task{
         super(description, isDone);
     }
 
-    public static ToDo createToDoTask(String description) throws CrayonInvalidFormatException{
+    public static ToDo createToDoTask(String description) throws CrayonInvalidFormatException {
         if (description == null || description.trim().isEmpty()) {
             throw new CrayonInvalidFormatException("ToDo description cannot be empty");
         }
         return new ToDo(description);
     }
 
-    public static ToDo createToDoFromCSV(String[] values) {
+    public static ToDo createToDoFromCsv(String[] values) {
         boolean isDone = Boolean.parseBoolean(values[1].trim());
         String taskDescription = values[2].trim();
         return new ToDo(taskDescription, isDone);
@@ -31,8 +31,8 @@ public class ToDo extends Task{
     }
 
     @Override
-    public String[] toCSVRow() {
-            return new String[]{getType(), String.valueOf(isDone), description, "", ""};
+    public String[] toCsvRow() {
+        return new String[]{getType(), String.valueOf(isDone), description, "", ""};
     }
 
     @Override

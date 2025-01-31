@@ -6,11 +6,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CSVReader {
+public class CsvReader {
 
     private final String filePath;
 
-    public CSVReader(String filePath){
+    public CsvReader(String filePath) {
         this.filePath = filePath;
     }
 
@@ -21,12 +21,12 @@ public class CSVReader {
         }
     }
 
-    public List<String[]> readFromCSV() throws IOException {
+    public List<String[]> readFromCsv() throws IOException {
         List<String[]> rows = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))){// Skip Header
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) { // Skip Header
             String line;
-            while((line = br.readLine()) != null) {
+            while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
                 rows.add(values);
             }

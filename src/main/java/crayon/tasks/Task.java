@@ -37,6 +37,6 @@ public abstract class Task {
         return (isDone ? "[X] " : "[ ] ") + description;
     }
 
-    public abstract String[] toCSVRow();
+    public abstract String[] toCsvRow();
     public abstract String getType();
 }

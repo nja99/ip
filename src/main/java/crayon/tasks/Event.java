@@ -1,12 +1,12 @@
 package crayon.tasks;
 
+import java.time.LocalDateTime;
+
 import crayon.exceptions.CrayonInvalidDateTimeException;
 import crayon.exceptions.CrayonInvalidFormatException;
 import crayon.utils.DateTime;
 
-import java.time.LocalDateTime;
-
-public class Event extends Task{
+public class Event extends Task {
 
     private final LocalDateTime startDate;
     private final LocalDateTime endDate;
@@ -45,7 +45,7 @@ public class Event extends Task{
         return new Event(taskDescription, startDate, endDate);
     }
 
-    public static Event createEventFromCSV(String[] values) throws CrayonInvalidDateTimeException {
+    public static Event createEventFromCsv(String[] values) throws CrayonInvalidDateTimeException {
         boolean isDone = Boolean.parseBoolean(values[1].trim());
         String taskDescription = values[2].trim();
         LocalDateTime startDate = DateTime.parseStoredDateTime(values[3].trim());
@@ -60,12 +60,13 @@ public class Event extends Task{
     }
 
     @Override
-    public String[] toCSVRow() {
+    public String[] toCsvRow() {
         return new String[]{getType(), String.valueOf(isDone), description, startDate.toString(), endDate.toString()};
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + DateTime.dateTimeToString(startDate) + " to: " + DateTime.dateTimeToString(endDate) + ")";
+        return "[E]" + super.toString() + " (from: " + DateTime.dateTimeToString(startDate)
+                + " to: " + DateTime.dateTimeToString(endDate) + ")";
     }
 }

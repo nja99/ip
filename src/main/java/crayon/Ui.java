@@ -27,13 +27,13 @@ public class Ui implements AutoCloseable {
     public void showWelcome() {
         String message = "Hello! I'm\n"
                 + Constants.ASCII_NAME
-                + "What can I do for you?\n";
+                + "\nWhat can I do for you?\n";
 
         showMessage(message);
     }
 
     // Display farewell message when the conversation ends.
-    public void showFarewell(){
+    public void showFarewell() {
         showMessage("Bye. Hope to see you again soon!\n");
     }
 

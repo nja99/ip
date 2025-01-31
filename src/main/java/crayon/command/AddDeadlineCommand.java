@@ -6,7 +6,7 @@ import crayon.Ui;
 import crayon.enums.Action;
 import crayon.enums.TaskType;
 
-public class AddDeadlineCommand extends Command{
+public class AddDeadlineCommand extends Command {
 
     private final String content;
 

@@ -1,18 +1,19 @@
 package crayon.utils;
 
-import crayon.exceptions.CrayonInvalidDateTimeException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import crayon.exceptions.CrayonInvalidDateTimeException;
 
 public class DateTime {
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
 
-    private DateTime(){} // Private constructor to prevent instantiation
+    private DateTime() {} // Private constructor to prevent instantiation
 
-    public static LocalDateTime stringToDateTime(String dateTimeString, boolean checkBefore) throws CrayonInvalidDateTimeException {
+    public static LocalDateTime stringToDateTime(String dateTimeString, boolean checkBefore)
+            throws CrayonInvalidDateTimeException {
         try {
             LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, FORMATTER);
 
@@ -22,8 +23,10 @@ public class DateTime {
 
             return dateTime;
         } catch (DateTimeParseException e) {
-            throw new CrayonInvalidDateTimeException("Use d/M/yyyy HHmm to convert the date/time string to a valid date.\n");
+            throw new CrayonInvalidDateTimeException(
+                    "Use d/M/yyyy HHmm to convert the date/time string to a valid date.\n");
         }
+
     }
 
     public static LocalDateTime parseStoredDateTime(String storedDateTime) throws CrayonInvalidDateTimeException {

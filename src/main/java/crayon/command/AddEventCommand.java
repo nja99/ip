@@ -6,7 +6,7 @@ import crayon.Ui;
 import crayon.enums.Action;
 import crayon.enums.TaskType;
 
-public class AddEventCommand extends Command{
+public class AddEventCommand extends Command {
 
     private final String content;
 

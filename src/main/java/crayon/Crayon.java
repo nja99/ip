@@ -1,9 +1,9 @@
 package crayon;
 
+import java.io.IOException;
+
 import crayon.command.Command;
 import crayon.exceptions.CrayonException;
-
-import java.io.IOException;
 
 public class Crayon {
 
@@ -16,7 +16,7 @@ public class Crayon {
         storage = new Storage();
 
         try {
-            taskList = new TaskList(storage.loadTasksFromCSV());
+            taskList = new TaskList(storage.loadTasksFromCsv());
         } catch (IOException e) {
             ui.showErrorMessage("Error loading tasks: " + e.getMessage());
             taskList = new TaskList();
@@ -28,7 +28,7 @@ public class Crayon {
     }
 
     public void run() {
-        try (Ui autoCloseUi = this.ui) {  // This will automatically close the UI when exiting the try block
+        try (Ui autoCloseUi = this.ui) { // This will automatically close the UI when exiting the try block
             autoCloseUi.showWelcome();
             boolean isExit = false;
             while (!isExit) {

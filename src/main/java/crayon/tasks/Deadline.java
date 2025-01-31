@@ -1,26 +1,20 @@
 package crayon.tasks;
 
+import java.time.LocalDateTime;
+
 import crayon.exceptions.CrayonInvalidFormatException;
 import crayon.utils.DateTime;
 
-import java.time.LocalDateTime;
-
-public class Deadline extends Task{
+public class Deadline extends Task {
 
     private final LocalDateTime endDate;
 
-    /**
-     * Constructs a Deadline task by parsing the provided description string.
-     * The expected format is: <task description> /by <deadline date>.
-     *
-     * @param description The description string containing the task and deadline.
-     */
-    private Deadline(String description, LocalDateTime endDate){
+    private Deadline(String description, LocalDateTime endDate) {
         super(description);
         this.endDate = endDate;
     }
 
-    private Deadline(String description, boolean isDone, LocalDateTime endDate){
+    private Deadline(String description, boolean isDone, LocalDateTime endDate) {
         super(description, isDone);
         this.endDate = endDate;
     }
@@ -36,12 +30,12 @@ public class Deadline extends Task{
         }
 
         String taskDescription = parts[0].trim();
-        LocalDateTime endDate = DateTime.stringToDateTime(parts[1].trim(),true);
+        LocalDateTime endDate = DateTime.stringToDateTime(parts[1].trim(), true);
 
         return new Deadline(taskDescription, endDate);
     }
 
-    public static Deadline createDeadlineFromCSV(String[] values) throws CrayonInvalidFormatException {
+    public static Deadline createDeadlineFromCsv(String[] values) throws CrayonInvalidFormatException {
         boolean isDone = Boolean.parseBoolean(values[1].trim());
         String taskDescription = values[2].trim();
         LocalDateTime endDate = DateTime.parseStoredDateTime(values[4].trim());
@@ -55,7 +49,7 @@ public class Deadline extends Task{
     }
 
     @Override
-    public String[] toCSVRow() {
+    public String[] toCsvRow() {
         return new String[]{getType(), String.valueOf(isDone), description, "", endDate.toString()};
     }
 
