@@ -1,15 +1,15 @@
 package crayon.tasks;
 
+import java.time.LocalDateTime;
+
 import crayon.exceptions.CrayonInvalidDateTimeException;
 import crayon.exceptions.CrayonInvalidFormatException;
 import crayon.utils.DateTime;
 
-import java.time.LocalDateTime;
-
 /**
  * Represents an Event task in Crayon.
  */
-public class Event extends Task{
+public class Event extends Task {
 
     private final LocalDateTime startDate;
     private final LocalDateTime endDate;
@@ -28,7 +28,7 @@ public class Event extends Task{
 
     /**
      * Creates an Event task from the provided description string.
-     * The expected format is: <task description> /from <start datetime> /to <end datetime>.
+     * The expected format is: (task) /from (start datetim) /to (end datetime).
      *
      * @param description The description string containing the task and event timings.
      * @return The Event task created from the description.
@@ -41,12 +41,12 @@ public class Event extends Task{
 
         String[] parts = description.split(" /from ");
         if (parts.length != 2) {
-            throw new CrayonInvalidFormatException("Use: <task description> /from <start datetime> /to <end datetime>\n");
+            throw new CrayonInvalidFormatException("Use: <task> /from <start datetime> /to <end datetime>\n");
         }
 
         String[] timeParts = parts[1].split(" /to ");
         if (timeParts.length != 2) {
-            throw new CrayonInvalidFormatException("Use: <task description> /from <start datetime> /to <end datetime>\n");
+            throw new CrayonInvalidFormatException("Use: <task> /from <start datetime> /to <end datetime>\n");
         }
 
         String taskDescription = parts[0].trim();
@@ -63,7 +63,7 @@ public class Event extends Task{
      * @return The Event task created from the CSV values.
      * @throws CrayonInvalidDateTimeException If the date and time format is invalid.
      */
-    public static Event createEventFromCSV(String[] values) throws CrayonInvalidDateTimeException {
+    public static Event createEventFromCsv(String[] values) throws CrayonInvalidDateTimeException {
         boolean isDone = Boolean.parseBoolean(values[1].trim());
         String taskDescription = values[2].trim();
         LocalDateTime startDate = DateTime.parseStoredDateTime(values[3].trim());
@@ -88,7 +88,7 @@ public class Event extends Task{
      * @return The CSV row of the Event task.
      */
     @Override
-    public String[] toCSVRow() {
+    public String[] toCsvRow() {
         return new String[]{getType(), String.valueOf(isDone), description, startDate.toString(), endDate.toString()};
     }
 
@@ -99,6 +99,7 @@ public class Event extends Task{
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + DateTime.dateTimeToString(startDate) + " to: " + DateTime.dateTimeToString(endDate) + ")";
+        return "[E]" + super.toString() + " (from: " + DateTime.dateTimeToString(startDate)
+                + " to: " + DateTime.dateTimeToString(endDate) + ")";
     }
 }

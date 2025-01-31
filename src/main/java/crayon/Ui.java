@@ -42,7 +42,7 @@ public class Ui implements AutoCloseable {
     public void showWelcome() {
         String message = "Hello! I'm\n"
                 + Constants.ASCII_NAME
-                + "What can I do for you?\n";
+                + "\nWhat can I do for you?\n";
 
         showMessage(message);
     }
@@ -50,16 +50,16 @@ public class Ui implements AutoCloseable {
     /**
      * Shows the farewell message to the user.
      */
-    public void showFarewell(){
+    public void showFarewell() {
         showMessage("Bye. Hope to see you again soon!\n");
     }
 
-    // Implemnentation to be Added
+    // Implementation to be Added
     public void showTaskAction(String message) {
         showMessage(message);
     }
 
-    // Implemnentation to be Added
+    // Implementation to be Added
     public void showStatusAction(String message) {
         showMessage(message);
     }

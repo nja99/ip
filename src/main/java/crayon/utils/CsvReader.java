@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Represents a CSV reader to read from a CSV file.
  */
-public class CSVReader {
+public class CsvReader {
 
     private final String filePath;
 
@@ -18,7 +18,7 @@ public class CSVReader {
      *
      * @param filePath The file path of the CSV file.
      */
-    public CSVReader(String filePath){
+    public CsvReader(String filePath) {
         this.filePath = filePath;
     }
 
@@ -41,12 +41,12 @@ public class CSVReader {
      * @return The content of the CSV file.
      * @throws IOException If an I/O error occurs.
      */
-    public List<String[]> readFromCSV() throws IOException {
+    public List<String[]> readFromCsv() throws IOException {
         List<String[]> rows = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))){// Skip Header
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) { // Skip Header
             String line;
-            while((line = br.readLine()) != null) {
+            while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
                 rows.add(values);
             }

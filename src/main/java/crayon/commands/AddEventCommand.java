@@ -9,11 +9,8 @@ import crayon.enums.TaskType;
 /**
  * Represents a command to add an event task.
  */
-public class AddEventCommand extends Command{
+public class AddEventCommand extends Command {
 
-    /**
-     * The content of the event task.
-     */
     private final String content;
 
     /**

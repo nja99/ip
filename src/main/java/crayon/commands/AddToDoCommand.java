@@ -9,11 +9,8 @@ import crayon.enums.TaskType;
 /**
  * Represents a command to add a todo task.
  */
-public class AddToDoCommand extends Command{
+public class AddToDoCommand extends Command {
 
-    /**
-     * The content of the todo task.
-     */
     private final String content;
 
     /**

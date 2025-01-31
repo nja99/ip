@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Represents a CSV writer to write to a CSV file.
  */
-public class CSVWriter {
+public class CsvWriter {
 
     private final String filePath;
 
@@ -19,7 +19,7 @@ public class CSVWriter {
      *
      * @param filePath The file path of the CSV file.
      */
-    public CSVWriter(String filePath) {
+    public CsvWriter(String filePath) {
         this.filePath = filePath;
     }
 
@@ -29,14 +29,14 @@ public class CSVWriter {
      * @param rows The rows to write to the CSV file.
      * @throws IOException If an I/O error occurs.
      */
-    public void writeToCSV(List<String[]> rows) throws IOException {
+    public void writeToCsv(List<String[]> rows) throws IOException {
 
         // Create file directories if they don't exist
         Path path = Paths.get(filePath);
         Files.createDirectories(path.getParent());
 
         try (FileWriter writer = new FileWriter(filePath)) {
-            for(String[] row : rows) {
+            for (String[] row : rows) {
                 writer.write(String.join(",", row) + "\n");
             }
         }

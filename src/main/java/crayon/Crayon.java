@@ -1,9 +1,9 @@
 package crayon;
 
+import java.io.IOException;
+
 import crayon.commands.Command;
 import crayon.exceptions.CrayonException;
-
-import java.io.IOException;
 
 /**
  * Crayon is a simple task manager that allows users to manage their tasks.
@@ -22,7 +22,7 @@ public class Crayon {
         storage = new Storage();
 
         try {
-            taskList = new TaskList(storage.loadTasksFromCSV());
+            taskList = new TaskList(storage.loadTasksFromCsv());
         } catch (IOException e) {
             ui.showErrorMessage("Error loading tasks: " + e.getMessage());
             taskList = new TaskList();
@@ -42,7 +42,7 @@ public class Crayon {
      * Runs the main loop of the application.
      */
     public void run() {
-        try (Ui autoCloseUi = this.ui) {  // This will automatically close the UI when exiting the try block
+        try (Ui autoCloseUi = this.ui) { // This will automatically close the UI when exiting the try block
             autoCloseUi.showWelcome();
             boolean isExit = false;
             while (!isExit) {

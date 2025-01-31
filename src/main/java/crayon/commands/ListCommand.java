@@ -9,7 +9,6 @@ import crayon.enums.Action;
  * Represents a command to list all tasks.
  */
 public class ListCommand extends Command {
-    
     /**
      * Constructs a ListCommand.
      */

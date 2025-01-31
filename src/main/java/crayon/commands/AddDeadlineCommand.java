@@ -9,9 +9,8 @@ import crayon.enums.TaskType;
 /**
  * Represents a command to add a deadline task.
  */
-public class AddDeadlineCommand extends Command{
+public class AddDeadlineCommand extends Command {
 
-    /** The content of the deadline task. */
     private final String content;
 
     /**

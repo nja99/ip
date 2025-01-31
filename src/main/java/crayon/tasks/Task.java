@@ -50,7 +50,7 @@ public abstract class Task {
      *
      * @return An array of strings representing the object's data in CSV format.
      */
-    public abstract String[] toCSVRow();
+    public abstract String[] toCsvRow();
 
     /**
      * Retrieves the type of this object.
