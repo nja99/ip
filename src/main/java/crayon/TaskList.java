@@ -9,6 +9,9 @@ import crayon.tasks.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class represents a list of tasks.
+ */
 public class TaskList {
 
     private final List<Task> tasks = new ArrayList<>();
@@ -18,8 +21,16 @@ public class TaskList {
     private static final String TASK_DONE_MESSAGE = "Nice! I've marked this task as done";
     private static final String TASK_UNDONE_MESSAGE = "OK, I've marked this task as not done yet";
 
+    /**
+     * Constructs a new TaskList instance.
+     */
     public TaskList() {}
 
+    /**
+     * Constructs a new TaskList instance with the specified tasks.
+     *
+     * @param tasks The tasks to add to the list.
+     */
     public TaskList(List<Task> tasks){
         this.tasks.addAll(tasks);
     }
@@ -34,6 +45,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Creates a new task and adds it to the list.
+     *
+     * @param taskType The type of task to create.
+     * @param description The description of the task.
+     * @return The message indicating the task has been added.
+     */
     public String createTask(TaskType taskType, String description) {
         try {
             Task task = switch (taskType) {
@@ -49,12 +67,19 @@ public class TaskList {
         }
     }
 
+    /**
+     * Retrieves the lsit of tasks
+     *
+     * @return A list containing all the tasks.
+     */
     public List<Task> getTasks() {
         return tasks;
     }
 
     /**
-     * Lists all crayon.tasks
+     * Lists all the tasks in the list.
+     *
+     * @return The message containing all the tasks in the list.
      */
     public String listTasks() {
         int counter = 1;
@@ -69,6 +94,12 @@ public class TaskList {
         return sb.toString();
     }
 
+    /**
+     * Deletes a task from the list.
+     *
+     * @param taskId The ID of the task to delete.
+     * @return The message indicating the task has been deleted.
+     */
     public String deleteTask(int taskId) throws CrayonIllegalArgumentException {
         validateTaskId(taskId);
 
@@ -78,6 +109,12 @@ public class TaskList {
 
     }
 
+    /**
+     * Marks a task as done.
+     *
+     * @param taskId The ID of the task to mark as done.
+     * @return The message indicating the task has been marked as done.
+     */
     public String markTaskAsDone(int taskId) throws CrayonIllegalArgumentException {
         validateTaskId(taskId);
 
@@ -87,6 +124,12 @@ public class TaskList {
         return formatStatusAction(task, TASK_DONE_MESSAGE);
     }
 
+    /**
+     * Marks a task as undone.
+     *
+     * @param taskId The ID of the task to mark as undone.
+     * @return The message indicating the task has been marked as undone.
+     */
     public String markTaskAsUndone (int taskId) throws CrayonIllegalArgumentException {
         validateTaskId(taskId);
 

@@ -1,20 +1,29 @@
 package crayon;
 
-import crayon.command.Command;
-import crayon.command.ListCommand;
-import crayon.command.AddToDoCommand;
-import crayon.command.AddDeadlineCommand;
-import crayon.command.AddEventCommand;
-import crayon.command.DeleteCommand;
-import crayon.command.MarkCommand;
-import crayon.command.UnmarkCommand;
-import crayon.command.ByeCommand;
+import crayon.commands.Command;
+import crayon.commands.ListCommand;
+import crayon.commands.AddToDoCommand;
+import crayon.commands.AddDeadlineCommand;
+import crayon.commands.AddEventCommand;
+import crayon.commands.DeleteCommand;
+import crayon.commands.MarkCommand;
+import crayon.commands.UnmarkCommand;
+import crayon.commands.ByeCommand;
 
 import crayon.enums.Action;
 import crayon.exceptions.CrayonUnsupportedTaskException;
 
+/**
+ * This class is responsible for parsing user input into commands.
+ */
 public class Parser {
 
+    /**
+     * Parses the user input into a command.
+     *
+     * @param userInput The user input.
+     * @return The command that corresponds to the user input.
+     */
     public static Command parseCommand(String userInput) {
         String[] args = userInput.split(" ", 2);
         String content = "";

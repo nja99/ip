@@ -1,16 +1,22 @@
 package crayon;
 
-import crayon.command.Command;
+import crayon.commands.Command;
 import crayon.exceptions.CrayonException;
 
 import java.io.IOException;
 
+/**
+ * Crayon is a simple task manager that allows users to manage their tasks.
+ */
 public class Crayon {
 
     private final Ui ui;
     private final Storage storage;
     private TaskList taskList;
 
+    /**
+     * Constructs a new Crayon instance.
+     */
     public Crayon() {
         ui = new Ui();
         storage = new Storage();
@@ -23,10 +29,18 @@ public class Crayon {
         }
     }
 
+    /**
+     * The main entry point of the application.
+     *
+     * @param args The command line arguments.
+     */
     public static void main(String[] args) {
         new Crayon().run();
     }
 
+    /**
+     * Runs the main loop of the application.
+     */
     public void run() {
         try (Ui autoCloseUi = this.ui) {  // This will automatically close the UI when exiting the try block
             autoCloseUi.showWelcome();

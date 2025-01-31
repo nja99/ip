@@ -14,11 +14,20 @@ import static crayon.tasks.Deadline.createDeadlineFromCSV;
 import static crayon.tasks.Event.createEventFromCSV;
 import static crayon.tasks.ToDo.createToDoFromCSV;
 
+/**
+ * This class is responsible for loading and saving tasks to a CSV file.
+ */
 public class Storage {
 
     private static final String DEFAULT_PATH = "./data/tasks.csv";
     private static final String[] DEFAULT_HEADER = {"task", "isDone", "description", "startDate", "endDate"};
 
+    /**
+     * Saves the tasks to a CSV file.
+     *
+     * @param tasks The tasks to save.
+     * @throws IOException If an I/O error occurs.
+     */
     public void saveTasksToCSV(List<Task> tasks) throws IOException {
         List<String[]> rows = new ArrayList<>();
         rows.add(DEFAULT_HEADER);
@@ -29,6 +38,12 @@ public class Storage {
         writer.writeToCSV(rows);
     }
 
+    /**
+     * Loads the tasks from a CSV file.
+     *
+     * @return The tasks loaded from the CSV file.
+     * @throws IOException If an I/O error occurs.
+     */
     public List<Task> loadTasksFromCSV() throws IOException {
 
         CSVReader reader = new CSVReader(DEFAULT_PATH);
