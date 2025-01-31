@@ -5,6 +5,10 @@ import crayon.utils.DateTime;
 
 import java.time.LocalDateTime;
 
+
+/**
+ * Represents a Deadline task in Crayon.
+ */
 public class Deadline extends Task{
 
     private final LocalDateTime endDate;
@@ -25,6 +29,14 @@ public class Deadline extends Task{
         this.endDate = endDate;
     }
 
+    /**
+     * Creates a Deadline task from the provided description string.
+     * The expected format is: <task description> /by <deadline date>.
+     *
+     * @param description The description string containing the task and deadline.
+     * @return The Deadline task created from the description.
+     * @throws CrayonInvalidFormatException If the description is in an invalid format.
+     */
     public static Deadline createDeadlineTask(String description) throws CrayonInvalidFormatException {
         if (description == null || description.trim().isEmpty()) {
             throw new CrayonInvalidFormatException("Deadline description cannot be empty\n");
@@ -41,6 +53,13 @@ public class Deadline extends Task{
         return new Deadline(taskDescription, endDate);
     }
 
+    /**
+     * Creates a Deadline task from the provided CSV values.
+     *
+     * @param values The CSV values to create the Deadline task from.
+     * @return The Deadline task created from the CSV values.
+     * @throws CrayonInvalidFormatException If the CSV values are in an invalid format.
+     */
     public static Deadline createDeadlineFromCSV(String[] values) throws CrayonInvalidFormatException {
         boolean isDone = Boolean.parseBoolean(values[1].trim());
         String taskDescription = values[2].trim();
@@ -49,16 +68,31 @@ public class Deadline extends Task{
         return new Deadline(taskDescription, isDone, endDate);
     }
 
+    /**
+     * Gets the end date of the Deadline task.
+     *
+     * @return The end date of the Deadline task.
+     */
     @Override
     public String getType() {
         return "deadline";
     }
 
+    /**
+     * Gets the end date of the Deadline task.
+     *
+     * @return The end date of the Deadline task.
+     */
     @Override
     public String[] toCSVRow() {
         return new String[]{getType(), String.valueOf(isDone), description, "", endDate.toString()};
     }
 
+    /**
+     * Returns the string representation of the Deadline task.
+     *
+     * @return The string representation of the Deadline task.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + DateTime.dateTimeToString(endDate) + ")";
