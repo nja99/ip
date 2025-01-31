@@ -42,7 +42,7 @@ public class DateTime {
     /**
      * Converts a stored LocalDateTime string to a LocalDateTime object.
      *
-     * @param dateTime The stored LocalDateTime string to be converted.
+     * @param storedDateTime The stored LocalDateTime string to be converted.
      * @return The LocalDateTime object.
      */
     public static LocalDateTime parseStoredDateTime(String storedDateTime) throws CrayonInvalidDateTimeException {
