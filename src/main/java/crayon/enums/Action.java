@@ -2,6 +2,9 @@ package crayon.enums;
 
 import crayon.exceptions.CrayonUnsupportedTaskException;
 
+/**
+ * Represents the action of a command.
+ */
 public enum Action {
     LIST,
     TODO,
@@ -12,6 +15,13 @@ public enum Action {
     UNMARK,
     BYE;
 
+    /**
+     * Returns the Action from the given string.
+     *
+     * @param value The string value to convert to Action.
+     * @return The Action from the given string.
+     * @throws CrayonUnsupportedTaskException If the string is not a valid Action.
+     */
     public static Action fromString(String value) throws CrayonUnsupportedTaskException {
         return switch (value.toLowerCase()) {
             case "list" -> Action.LIST;
