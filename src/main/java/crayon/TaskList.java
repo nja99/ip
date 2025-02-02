@@ -80,6 +80,12 @@ public class TaskList {
         return tasks;
     }
 
+    /**
+     * Filters the tasks in the list based on the pattern.
+     *
+     * @param pattern The pattern to filter the tasks.
+     * @return The list of tasks that match the pattern.
+     */
     public List<Task> filterTasks(String pattern) {
         return tasks.stream()
                 .filter(task -> task.getDescription().contains(pattern))
@@ -95,6 +101,12 @@ public class TaskList {
         return formatTaskList(tasks, "Here are the tasks in your list:");
     }
 
+    /**
+     * Lists the tasks in the list that match the pattern.
+     *
+     * @param pattern The pattern to match the tasks.
+     * @return The message containing the tasks that match the pattern.
+     */
     public String listFilteredTasks(String pattern) {
         List<Task> filteredTasks = filterTasks(pattern);
         return formatTaskList(filteredTasks, "Here are the matching tasks in your list:");
