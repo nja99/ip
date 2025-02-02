@@ -1,14 +1,6 @@
 package crayon;
 
-import crayon.command.Command;
-import crayon.command.ListCommand;
-import crayon.command.AddToDoCommand;
-import crayon.command.AddDeadlineCommand;
-import crayon.command.AddEventCommand;
-import crayon.command.DeleteCommand;
-import crayon.command.MarkCommand;
-import crayon.command.UnmarkCommand;
-import crayon.command.ByeCommand;
+import crayon.command.*;
 
 import crayon.enums.Action;
 import crayon.exceptions.CrayonUnsupportedTaskException;
@@ -24,6 +16,7 @@ public class Parser {
             Action action = Action.fromString(args[0]);
             return switch (action) {
                 case LIST -> new ListCommand();
+                case FIND -> new FindCommand(content);
                 case TODO -> new AddToDoCommand(content);
                 case DEADLINE -> new AddDeadlineCommand(content);
                 case EVENT -> new AddEventCommand(content);

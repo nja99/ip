@@ -8,6 +8,7 @@ import crayon.tasks.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList {
 
@@ -49,24 +50,26 @@ public class TaskList {
         }
     }
 
+    public List<Task> filterTasks(String pattern) {
+        return tasks.stream()
+                .filter(task -> task.getDescription().contains(pattern))
+                .collect(Collectors.toList());
+    }
+
     public List<Task> getTasks() {
         return tasks;
     }
 
     /**
-     * Lists all crayon.tasks
+     * Lists all tasks
      */
-    public String listTasks() {
-        int counter = 1;
+    public String listAllTasks() {
+        return formatTaskList(tasks, "Here are the tasks in your list:");
+    }
 
-        StringBuilder sb = new StringBuilder(Constants.SEPARATOR);
-        sb.append("Here are the tasks in your list:\n");
-        for(Task task : tasks) {
-            sb.append("    ").append(counter).append(".").append(task).append("\n");
-            counter++;
-        }
-        sb.append(Constants.SEPARATOR);
-        return sb.toString();
+    public String listFilteredTasks(String pattern) {
+        List<Task> filteredTasks = filterTasks(pattern);
+        return formatTaskList(filteredTasks, "Here are the matching tasks in your list:");
     }
 
     public String deleteTask(int taskId) throws CrayonIllegalArgumentException {
@@ -94,6 +97,16 @@ public class TaskList {
         task.markUndone();
 
         return formatStatusAction(task, TASK_UNDONE_MESSAGE);
+    }
+
+    private String formatTaskList(List<Task> taskToList, String header) {
+        StringBuilder sb = new StringBuilder(header + "\n");
+        int counter = 1;
+        for (Task task : taskToList) {
+            sb.append("    ").append(counter).append(".").append(task).append("\n");
+            counter++;
+        }
+        return sb.toString();
     }
 
     private String formatStatusAction(Task task, String message) {

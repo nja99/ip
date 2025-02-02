@@ -4,6 +4,7 @@ import crayon.exceptions.CrayonUnsupportedTaskException;
 
 public enum Action {
     LIST,
+    FIND,
     TODO,
     DEADLINE,
     EVENT,
@@ -15,6 +16,7 @@ public enum Action {
     public static Action fromString(String value) throws CrayonUnsupportedTaskException {
         return switch (value.toLowerCase()) {
             case "list" -> Action.LIST;
+            case "find" -> Action.FIND;
             case "todo" -> Action.TODO;
             case "deadline" -> Action.DEADLINE;
             case "event" -> Action.EVENT;
