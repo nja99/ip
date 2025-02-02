@@ -21,6 +21,10 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     /**
      * Marks the task as done by setting {@code isDone} to {@code true}.
      */

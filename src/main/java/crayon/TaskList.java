@@ -2,6 +2,7 @@ package crayon;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import crayon.enums.TaskType;
 import crayon.exceptions.CrayonIllegalArgumentException;
@@ -71,7 +72,7 @@ public class TaskList {
     }
 
     /**
-     * Retrieves the lsit of tasks
+     * Retrieves the list of tasks
      *
      * @return A list containing all the tasks.
      */
@@ -79,22 +80,24 @@ public class TaskList {
         return tasks;
     }
 
+    public List<Task> filterTasks(String pattern) {
+        return tasks.stream()
+                .filter(task -> task.getDescription().contains(pattern))
+                .collect(Collectors.toList());
+    }
+
     /**
      * Lists all the tasks in the list.
      *
      * @return The message containing all the tasks in the list.
      */
-    public String listTasks() {
-        int counter = 1;
+    public String listAllTasks() {
+        return formatTaskList(tasks, "Here are the tasks in your list:");
+    }
 
-        StringBuilder sb = new StringBuilder(Constants.SEPARATOR);
-        sb.append("Here are the tasks in your list:\n");
-        for (Task task : tasks) {
-            sb.append("    ").append(counter).append(".").append(task).append("\n");
-            counter++;
-        }
-        sb.append(Constants.SEPARATOR);
-        return sb.toString();
+    public String listFilteredTasks(String pattern) {
+        List<Task> filteredTasks = filterTasks(pattern);
+        return formatTaskList(filteredTasks, "Here are the matching tasks in your list:");
     }
 
     /**
@@ -140,6 +143,16 @@ public class TaskList {
         task.markUndone();
 
         return formatStatusAction(task, TASK_UNDONE_MESSAGE);
+    }
+
+    private String formatTaskList(List<Task> taskToList, String header) {
+        StringBuilder sb = new StringBuilder(header + "\n");
+        int counter = 1;
+        for (Task task : taskToList) {
+            sb.append("    ").append(counter).append(".").append(task).append("\n");
+            counter++;
+        }
+        return sb.toString();
     }
 
     private String formatStatusAction(Task task, String message) {

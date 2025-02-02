@@ -6,6 +6,7 @@ import crayon.commands.AddToDoCommand;
 import crayon.commands.ByeCommand;
 import crayon.commands.Command;
 import crayon.commands.DeleteCommand;
+import crayon.commands.FindCommand;
 import crayon.commands.ListCommand;
 import crayon.commands.MarkCommand;
 import crayon.commands.UnmarkCommand;
@@ -34,14 +35,15 @@ public class Parser {
         try {
             Action action = Action.fromString(args[0]);
             return switch (action) {
-            case LIST -> new ListCommand();
-            case TODO -> new AddToDoCommand(content);
-            case DEADLINE -> new AddDeadlineCommand(content);
-            case EVENT -> new AddEventCommand(content);
-            case DELETE -> new DeleteCommand(content);
-            case MARK -> new MarkCommand(content);
-            case UNMARK -> new UnmarkCommand(content);
-            case BYE -> new ByeCommand();
+                case LIST -> new ListCommand();
+                case FIND -> new FindCommand(content);
+                case TODO -> new AddToDoCommand(content);
+                case DEADLINE -> new AddDeadlineCommand(content);
+                case EVENT -> new AddEventCommand(content);
+                case DELETE -> new DeleteCommand(content);
+                case MARK -> new MarkCommand(content);
+                case UNMARK -> new UnmarkCommand(content);
+                case BYE -> new ByeCommand();
             };
         } catch (CrayonUnsupportedTaskException e) {
             System.out.println(e.getMessage());
