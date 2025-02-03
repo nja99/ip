@@ -59,9 +59,9 @@ public class TaskList {
     public String createTask(TaskType taskType, String description) {
         try {
             Task task = switch (taskType) {
-            case TODO -> ToDo.createToDoTask(description);
-            case DEADLINE -> Deadline.createDeadlineTask(description);
-            case EVENT -> Event.createEventTask(description);
+                case TODO -> ToDo.createToDoTask(description);
+                case DEADLINE -> Deadline.createDeadlineTask(description);
+                case EVENT -> Event.createEventTask(description);
             };
 
             tasks.add(task);
