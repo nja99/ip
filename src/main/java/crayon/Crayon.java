@@ -4,6 +4,10 @@ import java.io.IOException;
 
 import crayon.commands.Command;
 import crayon.exceptions.CrayonException;
+import crayon.parser.Parser;
+import crayon.storage.Storage;
+import crayon.tasklist.TaskList;
+import crayon.ui.Ui;
 
 /**
  * Crayon is a simple task manager that allows users to manage their tasks.

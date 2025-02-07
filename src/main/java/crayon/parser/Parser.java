@@ -1,4 +1,4 @@
-package crayon;
+package crayon.parser;
 
 import crayon.commands.AddDeadlineCommand;
 import crayon.commands.AddEventCommand;
