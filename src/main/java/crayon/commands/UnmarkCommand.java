@@ -1,10 +1,10 @@
 package crayon.commands;
 
-import crayon.Storage;
-import crayon.TaskList;
-import crayon.Ui;
 import crayon.enums.Action;
 import crayon.exceptions.CrayonIllegalArgumentException;
+import crayon.storage.Storage;
+import crayon.tasklist.TaskList;
+import crayon.ui.Ui;
 
 /**
  * Represents a command to unmark a task as done.

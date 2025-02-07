@@ -1,4 +1,4 @@
-package crayon;
+package crayon.storage;
 
 import static crayon.tasks.Deadline.createDeadlineFromCsv;
 import static crayon.tasks.Event.createEventFromCsv;
@@ -22,6 +22,16 @@ public class Storage {
     private static final String DEFAULT_PATH = "./data/tasks.csv";
     private static final String[] DEFAULT_HEADER = {"task", "isDone", "description", "startDate", "endDate"};
 
+    private final String filePath;
+
+    public Storage(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public Storage() {
+        this(DEFAULT_PATH);
+    }
+
     /**
      * Saves the tasks to a CSV file.
      *
@@ -34,7 +44,7 @@ public class Storage {
         for (Task task : tasks) {
             rows.add(task.toCsvRow());
         }
-        CsvWriter writer = new CsvWriter(DEFAULT_PATH);
+        CsvWriter writer = new CsvWriter(filePath);
         writer.writeToCsv(rows);
     }
 
@@ -46,7 +56,7 @@ public class Storage {
      */
     public List<Task> loadTasksFromCsv() throws IOException {
 
-        CsvReader reader = new CsvReader(DEFAULT_PATH);
+        CsvReader reader = new CsvReader(filePath);
         List<String[]> rows = reader.readFromCsv();
 
         List<Task> tasks = new ArrayList<>();

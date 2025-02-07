@@ -1,8 +1,10 @@
-package crayon;
+package crayon.ui;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import crayon.Constants;
 
 /**
  * This class represents the user interface of the application.
