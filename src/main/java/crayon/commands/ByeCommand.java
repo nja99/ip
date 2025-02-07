@@ -2,11 +2,11 @@ package crayon.commands;
 
 import java.io.IOException;
 
+import crayon.enums.Action;
+import crayon.exceptions.CrayonIllegalArgumentException;
 import crayon.storage.Storage;
 import crayon.tasklist.TaskList;
 import crayon.ui.Ui;
-import crayon.enums.Action;
-import crayon.exceptions.CrayonIllegalArgumentException;
 
 /**
  * Represents a command to exit the program.

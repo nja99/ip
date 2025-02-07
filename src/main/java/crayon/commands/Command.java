@@ -1,10 +1,10 @@
 package crayon.commands;
 
+import crayon.enums.Action;
+import crayon.exceptions.CrayonException;
 import crayon.storage.Storage;
 import crayon.tasklist.TaskList;
 import crayon.ui.Ui;
-import crayon.enums.Action;
-import crayon.exceptions.CrayonException;
 
 /**
  * Represents a command to be executed.

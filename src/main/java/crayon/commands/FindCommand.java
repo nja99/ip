@@ -1,9 +1,9 @@
 package crayon.commands;
 
+import crayon.enums.Action;
 import crayon.storage.Storage;
 import crayon.tasklist.TaskList;
 import crayon.ui.Ui;
-import crayon.enums.Action;
 
 /**
  * This class represents a command to find tasks.

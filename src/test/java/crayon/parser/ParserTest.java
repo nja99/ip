@@ -1,11 +1,12 @@
 package crayon.parser;
 
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+
+import org.junit.jupiter.api.Test;
+
 import crayon.commands.Command;
 import crayon.commands.FindCommand;
 import crayon.commands.ListCommand;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class ParserTest {
 
