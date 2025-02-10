@@ -8,6 +8,7 @@ import crayon.enums.TaskType;
 import crayon.exceptions.CrayonIllegalArgumentException;
 import crayon.exceptions.CrayonInvalidFormatException;
 import crayon.exceptions.CrayonInvalidTaskIdException;
+import crayon.exceptions.CrayonTaskCreationException;
 import crayon.tasks.Deadline;
 import crayon.tasks.Event;
 import crayon.tasks.Task;
@@ -39,17 +40,20 @@ public class TaskList {
      * @param taskType The type of task to create.
      * @param description The description of the task.
      * @return The task that was created.
-     * @throws CrayonInvalidFormatException If the task description is invalid.
+     * @throws CrayonTaskCreationException If the task description is invalid.
      */
-    public Task createTask(TaskType taskType, String description) throws CrayonInvalidFormatException {
-        Task task = switch (taskType) {
-            case TODO -> ToDo.createToDoTask(description);
-            case DEADLINE -> Deadline.createDeadlineTask(description);
-            case EVENT -> Event.createEventTask(description);
-        };
-
-        tasks.add(task);
-        return task;
+    public Task createTask(TaskType taskType, String description) throws CrayonTaskCreationException {
+        try {
+            Task task = switch (taskType) {
+                case TODO -> ToDo.createToDoTask(description);
+                case DEADLINE -> Deadline.createDeadlineTask(description);
+                case EVENT -> Event.createEventTask(description);
+            };
+            tasks.add(task);
+            return task;
+        } catch (CrayonInvalidFormatException e) {
+            throw new CrayonTaskCreationException(e.getMessage());
+        }
     }
 
     /**
