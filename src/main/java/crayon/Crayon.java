@@ -32,6 +32,12 @@ public class Crayon {
         }
     }
 
+    /**
+     * Gets the response to the user input.
+     *
+     * @param input The user input.
+     * @return The response to the user input.
+     */
     public String getResponse(String input) {
         try {
             Command command = Parser.parseCommand(input);
@@ -45,10 +51,20 @@ public class Crayon {
         }
     }
 
+    /**
+     * Shows the welcome message.
+     *
+     * @return The welcome message.
+     */
     public String showWelcomeMessage() {
         return ui.getWelcomeMessage();
     }
 
+    /**
+     * Saves the tasks to the storage file when the application exits.
+     *
+     * @return True if the tasks were saved successfully, false otherwise.
+     */
     public boolean saveOnExit() {
         return storage.saveTasksToCsv(taskList.getTasks());
     }
