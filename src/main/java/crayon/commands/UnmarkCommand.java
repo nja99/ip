@@ -4,6 +4,7 @@ import crayon.enums.Action;
 import crayon.exceptions.CrayonIllegalArgumentException;
 import crayon.storage.Storage;
 import crayon.tasklist.TaskList;
+import crayon.tasks.Task;
 import crayon.ui.Ui;
 
 /**
@@ -34,6 +35,7 @@ public class UnmarkCommand extends Command {
      */
     @Override
     public String execute(Storage storage, TaskList taskList, Ui ui) throws CrayonIllegalArgumentException {
-        return taskList.markTaskAsUndone(Integer.parseInt(content));
+        Task task = taskList.markTaskAsUndone(Integer.parseInt(content));
+        return ui.getTaskUndoneMessage(task);
     }
 }

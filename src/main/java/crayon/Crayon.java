@@ -28,7 +28,6 @@ public class Crayon {
         try {
             taskList = new TaskList(storage.loadTasksFromCsv());
         } catch (IOException e) {
-            ui.showErrorMessage("Error loading tasks: " + e.getMessage());
             taskList = new TaskList();
         }
     }
@@ -37,13 +36,17 @@ public class Crayon {
         try {
             Command command = Parser.parseCommand(input);
             if (command != null) {
-                return command.execute(storage, ui, taskList);
+                return command.execute(storage, taskList, ui);
             } else {
-                return "I'm sorry, but I didn't understand that command.";
+                return ui.getUnknownCommandMessage();
             }
         } catch (CrayonException e) {
             return e.getMessage();
         }
+    }
+
+    public String showWelcomeMessage() {
+        return ui.getWelcomeMessage();
     }
 
     public boolean saveOnExit() {

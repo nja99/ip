@@ -3,7 +3,6 @@ package crayon.ui;
 import java.util.Objects;
 
 import crayon.Crayon;
-import crayon.exceptions.CrayonException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -16,6 +15,12 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+
+    private static final Image USER_IMAGE = new Image(Objects.requireNonNull(
+            MainWindow.class.getResourceAsStream("/images/userProfile.png")));
+    private static final Image CRAYON_IMAGE = new Image(Objects.requireNonNull(
+            MainWindow.class.getResourceAsStream("/images/crayonProfile.png")));
+
     @FXML
     private ScrollPane scrollPane;
 
@@ -30,11 +35,6 @@ public class MainWindow extends AnchorPane {
 
     private Crayon crayon;
 
-    private final Image userImage = new Image(Objects.requireNonNull(
-            this.getClass().getResourceAsStream("/images/userProfile.png")));
-    private final Image crayonImage = new Image(Objects.requireNonNull(
-            this.getClass().getResourceAsStream("/images/crayonProfile.png")));
-
     @FXML
     private void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -42,6 +42,7 @@ public class MainWindow extends AnchorPane {
 
     public void setCrayon(Crayon crayon) {
         this.crayon = crayon;
+        dialogContainer.getChildren().add(DialogBox.getCrayonDialog(crayon.showWelcomeMessage(), CRAYON_IMAGE));
     }
 
     @FXML
@@ -50,8 +51,8 @@ public class MainWindow extends AnchorPane {
         if (!userInput.getText().isEmpty()) {
             String response = crayon.getResponse(input);
             dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getCrayonDialog(response, crayonImage)
+                    DialogBox.getUserDialog(input, USER_IMAGE),
+                    DialogBox.getCrayonDialog(response, CRAYON_IMAGE)
             );
         }
         userInput.clear();

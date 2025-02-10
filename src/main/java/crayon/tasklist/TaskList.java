@@ -18,11 +18,6 @@ import crayon.tasks.ToDo;
  */
 public class TaskList {
 
-    private static final String TASK_ADDED_MESSAGE = "Got it. I've added this task";
-    private static final String TASK_REMOVED_MESSAGE = "Noted. I've removed this task";
-    private static final String TASK_DONE_MESSAGE = "Nice! I've marked this task as done";
-    private static final String TASK_UNDONE_MESSAGE = "OK, I've marked this task as not done yet";
-
     private final List<Task> tasks = new ArrayList<>();
     /**
      * Constructs a new TaskList instance.
@@ -38,52 +33,74 @@ public class TaskList {
         this.tasks.addAll(tasks);
     }
 
-    private void validateTaskId(int taskId) throws CrayonIllegalArgumentException {
-        if (tasks.isEmpty()) {
-            throw new CrayonIllegalArgumentException("No tasks available to perform this action.");
-        }
-
-        if (taskId < 1 || taskId >= tasks.size() + 1) {
-            throw new CrayonInvalidTaskIdException("Invalid TaskID! Please enter a number between 1 - "
-                    + (tasks.size() + 1));
-        }
-    }
-
     /**
      * Creates a new task and adds it to the list.
      *
      * @param taskType The type of task to create.
      * @param description The description of the task.
-     * @return The message indicating the task has been added.
+     * @return The task that was created.
+     * @throws CrayonInvalidFormatException If the task description is invalid.
      */
-    public String createTask(TaskType taskType, String description) {
-        try {
-            Task task = switch (taskType) {
-                case TODO -> ToDo.createToDoTask(description);
-                case DEADLINE -> Deadline.createDeadlineTask(description);
-                case EVENT -> Event.createEventTask(description);
-            };
+    public Task createTask(TaskType taskType, String description) throws CrayonInvalidFormatException {
+        Task task = switch (taskType) {
+            case TODO -> ToDo.createToDoTask(description);
+            case DEADLINE -> Deadline.createDeadlineTask(description);
+            case EVENT -> Event.createEventTask(description);
+        };
 
-            tasks.add(task);
-            return formatTaskAction(task, TASK_ADDED_MESSAGE);
-        } catch (CrayonInvalidFormatException e) {
-            return e.getMessage();
-        }
+        tasks.add(task);
+        return task;
     }
 
     /**
-     * Retrieves the list of tasks
+     * Deletes the task at the specified index.
      *
-     * @return A list containing all the tasks.
+     * @param taskId The index of the task to delete.
+     * @return The task that was deleted.
+     * @throws CrayonIllegalArgumentException If the task ID is invalid.
      */
-    public List<Task> getTasks() {
-        return tasks;
+    public Task deleteTask(int taskId) throws CrayonIllegalArgumentException {
+        validateTaskId(taskId);
+
+        return tasks.remove(taskId - 1);
     }
 
     /**
-     * Filters the tasks in the list based on the pattern.
+     * Marks the task at the specified index as done.
      *
-     * @param pattern The pattern to filter the tasks.
+     * @param taskId The index of the task to mark as done.
+     * @return The task that was marked as done.
+     * @throws CrayonIllegalArgumentException If the task ID is invalid.
+     */
+    public Task markTaskAsDone(int taskId) throws CrayonIllegalArgumentException {
+        validateTaskId(taskId);
+
+        Task task = tasks.get(taskId - 1);
+        task.markDone();
+
+        return task;
+    }
+
+    /**
+     * Marks the task at the specified index as not done.
+     *
+     * @param taskId The index of the task to mark as not done.
+     * @return The task that was marked as not done.
+     * @throws CrayonIllegalArgumentException If the task ID is invalid.
+     */
+    public Task markTaskAsUndone(int taskId) throws CrayonIllegalArgumentException {
+        validateTaskId(taskId);
+
+        Task task = tasks.get(taskId - 1);
+        task.markUndone();
+
+        return task;
+    }
+
+    /**
+     * Filters the tasks based on the specified pattern.
+     *
+     * @param pattern The pattern to filter the tasks with.
      * @return The list of tasks that match the pattern.
      */
     public List<Task> filterTasks(String pattern) {
@@ -93,86 +110,31 @@ public class TaskList {
     }
 
     /**
-     * Lists all the tasks in the list.
+     * Returns the list of tasks.
      *
-     * @return The message containing all the tasks in the list.
+     * @return The list of tasks.
      */
-    public String listAllTasks() {
-        return formatTaskList(tasks, "Here are the tasks in your list:");
+    public List<Task> getTasks() {
+        return tasks;
     }
 
     /**
-     * Lists the tasks in the list that match the pattern.
+     * Returns the size of the task list.
      *
-     * @param pattern The pattern to match the tasks.
-     * @return The message containing the tasks that match the pattern.
+     * @return The size of the task list.
      */
-    public String listFilteredTasks(String pattern) {
-        List<Task> filteredTasks = filterTasks(pattern);
-        return formatTaskList(filteredTasks, "Here are the matching tasks in your list:");
+    public int getSize() {
+        return tasks.size();
     }
 
-    /**
-     * Deletes a task from the list.
-     *
-     * @param taskId The ID of the task to delete.
-     * @return The message indicating the task has been deleted.
-     */
-    public String deleteTask(int taskId) throws CrayonIllegalArgumentException {
-        validateTaskId(taskId);
-
-        Task task = tasks.get(taskId - 1);
-        tasks.remove(taskId - 1);
-        return formatTaskAction(task, TASK_REMOVED_MESSAGE);
-
-    }
-
-    /**
-     * Marks a task as done.
-     *
-     * @param taskId The ID of the task to mark as done.
-     * @return The message indicating the task has been marked as done.
-     */
-    public String markTaskAsDone(int taskId) throws CrayonIllegalArgumentException {
-        validateTaskId(taskId);
-
-        Task task = tasks.get(taskId - 1);
-        task.markDone();
-
-        return formatStatusAction(task, TASK_DONE_MESSAGE);
-    }
-
-    /**
-     * Marks a task as undone.
-     *
-     * @param taskId The ID of the task to mark as undone.
-     * @return The message indicating the task has been marked as undone.
-     */
-    public String markTaskAsUndone(int taskId) throws CrayonIllegalArgumentException {
-        validateTaskId(taskId);
-
-        Task task = tasks.get(taskId - 1);
-        task.markUndone();
-
-        return formatStatusAction(task, TASK_UNDONE_MESSAGE);
-    }
-
-    private String formatTaskList(List<Task> taskToList, String header) {
-        StringBuilder sb = new StringBuilder(header + "\n");
-        int counter = 1;
-        for (Task task : taskToList) {
-            sb.append("    ").append(counter).append(".").append(task).append("\n");
-            counter++;
+    private void validateTaskId(int taskId) throws CrayonIllegalArgumentException {
+        if (tasks.isEmpty()) {
+            throw new CrayonIllegalArgumentException("No tasks available to perform this action.");
         }
-        return sb.toString();
-    }
 
-    private String formatStatusAction(Task task, String message) {
-        return message + "\n    " + task + "\n";
-    }
-
-    private String formatTaskAction(Task task, String message) {
-        return message + "\n    " + task + "\n"
-                + "Now you have " + tasks.size() + " tasks in your list\n";
+        if (taskId < 1 || taskId >= tasks.size() + 1) {
+            throw new CrayonInvalidTaskIdException("Invalid TaskID! Please enter a number between 1 - "
+                    + (tasks.size() + 1));
+        }
     }
 }

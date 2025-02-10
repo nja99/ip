@@ -4,6 +4,7 @@ import crayon.enums.Action;
 import crayon.exceptions.CrayonIllegalArgumentException;
 import crayon.storage.Storage;
 import crayon.tasklist.TaskList;
+import crayon.tasks.Task;
 import crayon.ui.Ui;
 
 /**
@@ -34,6 +35,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(Storage storage, TaskList taskList, Ui ui) throws CrayonIllegalArgumentException {
-        return taskList.deleteTask(Integer.parseInt(content));
+        Task task = taskList.deleteTask(Integer.parseInt(content));
+        return ui.getTaskDeletedMessage(task, taskList.getSize());
     }
 }

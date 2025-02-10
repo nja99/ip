@@ -2,8 +2,10 @@ package crayon.commands;
 
 import crayon.enums.Action;
 import crayon.enums.TaskType;
+import crayon.exceptions.CrayonInvalidFormatException;
 import crayon.storage.Storage;
 import crayon.tasklist.TaskList;
+import crayon.tasks.Task;
 import crayon.ui.Ui;
 
 /**
@@ -33,7 +35,8 @@ public class AddDeadlineCommand extends Command {
      * @return The response to the user.
      */
     @Override
-    public String execute(Storage storage, TaskList taskList, Ui ui) {
-        return taskList.createTask(TaskType.DEADLINE, content);
+    public String execute(Storage storage, TaskList taskList, Ui ui) throws CrayonInvalidFormatException {
+        Task task = taskList.createTask(TaskType.DEADLINE, content);
+        return ui.getTaskAddedMessage(task, taskList.getSize());
     }
 }

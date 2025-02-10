@@ -32,6 +32,6 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(Storage storage, TaskList taskList, Ui ui) {
-        return taskList.listFilteredTasks(content);
+        return ui.getListFilteredTasksMessage(taskList.filterTasks(content));
     }
 }
