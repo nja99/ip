@@ -23,8 +23,17 @@ public class DeleteCommand extends Command {
         this.content = content;
     }
 
+    /**
+     * Executes the command to delete a task.
+     *
+     * @param storage The storage object to save the task to.
+     * @param taskList The task list object to delete the task from.
+     * @param ui The user interface object to interact with the user.
+     * @return The response to the user.
+     * @throws CrayonIllegalArgumentException If an error occurs during the execution of the command.
+     */
     @Override
-    public String execute(Storage storage, Ui ui, TaskList taskList) throws CrayonIllegalArgumentException {
+    public String execute(Storage storage, TaskList taskList, Ui ui) throws CrayonIllegalArgumentException {
         return taskList.deleteTask(Integer.parseInt(content));
     }
 }
