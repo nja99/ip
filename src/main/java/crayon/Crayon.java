@@ -28,43 +28,28 @@ public class Crayon {
         try {
             taskList = new TaskList(storage.loadTasksFromCsv());
         } catch (IOException e) {
-            ui.showErrorMessage("Error loading tasks: " + e.getMessage());
             taskList = new TaskList();
         }
     }
 
-    /**
-     * The main entry point of the application.
-     *
-     * @param args The command line arguments.
-     */
-    public static void main(String[] args) {
-        new Crayon().run();
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parseCommand(input);
+            if (command != null) {
+                return command.execute(storage, taskList, ui);
+            } else {
+                return ui.getUnknownCommandMessage();
+            }
+        } catch (CrayonException e) {
+            return e.getMessage();
+        }
     }
 
-    /**
-     * Runs the main loop of the application.
-     */
-    public void run() {
-        try (Ui autoCloseUi = this.ui) { // This will automatically close the UI when exiting the try block
-            autoCloseUi.showWelcome();
-            boolean isExit = false;
-            while (!isExit) {
-                try {
-                    String userCommand = autoCloseUi.readUserCommand();
-                    Command command = Parser.parseCommand(userCommand);
-                    if (command != null) {
-                        command.execute(storage, autoCloseUi, taskList);
-                        isExit = command.exitRequested();
-                    }
-                } catch (IOException e) {
-                    autoCloseUi.showErrorMessage("IO error: " + e.getMessage());
-                } catch (CrayonException e) {
-                    autoCloseUi.showErrorMessage(e.getMessage());
-                }
-            }
-        } catch (Exception e) {
-            ui.showErrorMessage("Error closing UI: " + e.getMessage());
-        }
+    public String showWelcomeMessage() {
+        return ui.getWelcomeMessage();
+    }
+
+    public boolean saveOnExit() {
+        return storage.saveTasksToCsv(taskList.getTasks());
     }
 }

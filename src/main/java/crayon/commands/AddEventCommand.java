@@ -2,8 +2,10 @@ package crayon.commands;
 
 import crayon.enums.Action;
 import crayon.enums.TaskType;
+import crayon.exceptions.CrayonInvalidFormatException;
 import crayon.storage.Storage;
 import crayon.tasklist.TaskList;
+import crayon.tasks.Task;
 import crayon.ui.Ui;
 
 /**
@@ -26,13 +28,14 @@ public class AddEventCommand extends Command {
     /**
      * Executes the command to add an event task.
      *
-     * @param storage The storage to save the task.
-     * @param ui The user interface to show messages.
-     * @param taskList The task list to add the task.
+     * @param storage The storage object to save the task to.
+     * @param taskList The task list object to add the task to.
+     * @param ui The user interface object to interact with the user.
+     * @return The response to the user.
      */
     @Override
-    public void execute(Storage storage, Ui ui, TaskList taskList) {
-        String eventMessage = taskList.createTask(TaskType.EVENT, content);
-        ui.showTaskAction(eventMessage);
+    public String execute(Storage storage, TaskList taskList, Ui ui) throws CrayonInvalidFormatException {
+        Task task = taskList.createTask(TaskType.EVENT, content);
+        return ui.getTaskAddedMessage(task, taskList.getSize());
     }
 }

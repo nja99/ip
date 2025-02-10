@@ -25,21 +25,13 @@ public abstract class Command {
     }
 
     /**
-     * Returns the exit status of the command.
-     *
-     * @return The exit status of the command.
-     */
-    public boolean exitRequested() {
-        return this.isExit;
-    }
-
-    /**
      * Executes the command.
      *
-     * @param storage The storage to save the task.
-     * @param ui The user interface to show messages.
-     * @param taskList The task list to add the task.
-     * @throws CrayonException If there is an exception.
+     * @param storage The storage object to save the tasks to.
+     * @param taskList The task list object to save the tasks from.
+     * @param ui The user interface object to interact with the user.
+     * @return The response to the user.
+     * @throws CrayonException If an error occurs during the execution of the command.
      */
-    public abstract void execute(Storage storage, Ui ui, TaskList taskList) throws CrayonException;
+    public abstract String execute(Storage storage, TaskList taskList, Ui ui) throws CrayonException;
 }

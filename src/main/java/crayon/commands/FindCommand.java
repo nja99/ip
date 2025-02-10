@@ -25,12 +25,13 @@ public class FindCommand extends Command {
     /**
      * Executes the command to find tasks.
      *
-     * @param storage The storage to save the task list to.
-     * @param ui The user interface to interact with the user.
-     * @param taskList The task list to find tasks from.
+     * @param storage The storage object to save the task to.
+     * @param taskList The task list object to find tasks from.
+     * @param ui The user interface object to interact with the user.
+     * @return The response to the user.
      */
     @Override
-    public void execute(Storage storage, Ui ui, TaskList taskList) {
-        ui.showMessage(taskList.listFilteredTasks(content));
+    public String execute(Storage storage, TaskList taskList, Ui ui) {
+        return ui.getListFilteredTasksMessage(taskList.filterTasks(content));
     }
 }

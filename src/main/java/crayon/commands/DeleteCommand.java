@@ -4,6 +4,7 @@ import crayon.enums.Action;
 import crayon.exceptions.CrayonIllegalArgumentException;
 import crayon.storage.Storage;
 import crayon.tasklist.TaskList;
+import crayon.tasks.Task;
 import crayon.ui.Ui;
 
 /**
@@ -23,9 +24,18 @@ public class DeleteCommand extends Command {
         this.content = content;
     }
 
+    /**
+     * Executes the command to delete a task.
+     *
+     * @param storage The storage object to save the task to.
+     * @param taskList The task list object to delete the task from.
+     * @param ui The user interface object to interact with the user.
+     * @return The response to the user.
+     * @throws CrayonIllegalArgumentException If an error occurs during the execution of the command.
+     */
     @Override
-    public void execute(Storage storage, Ui ui, TaskList taskList) throws CrayonIllegalArgumentException {
-        String deleteMessage = taskList.deleteTask(Integer.parseInt(content));
-        ui.showMessage(deleteMessage);
+    public String execute(Storage storage, TaskList taskList, Ui ui) throws CrayonIllegalArgumentException {
+        Task task = taskList.deleteTask(Integer.parseInt(content));
+        return ui.getTaskDeletedMessage(task, taskList.getSize());
     }
 }

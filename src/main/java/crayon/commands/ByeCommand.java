@@ -1,7 +1,5 @@
 package crayon.commands;
 
-import java.io.IOException;
-
 import crayon.enums.Action;
 import crayon.exceptions.CrayonIllegalArgumentException;
 import crayon.storage.Storage;
@@ -20,19 +18,16 @@ public class ByeCommand extends Command {
     /**
      * Executes the command to exit the program.
      *
-     * @param storage The storage to save the task.
-     * @param ui The user interface to show messages.
-     * @param taskList The task list to add the task.
-     * @throws CrayonIllegalArgumentException If there is an invalid argument.
+     * @param storage The storage object to save the tasks to.
+     * @param taskList The task list object to save the tasks from.
+     * @param ui The user interface object to interact with the user.
+     * @return The response to the user.
+     * @throws CrayonIllegalArgumentException If an error occurs during the execution of the command.
      */
     @Override
-    public void execute(Storage storage, Ui ui, TaskList taskList) throws CrayonIllegalArgumentException {
+    public String execute(Storage storage, TaskList taskList, Ui ui) throws CrayonIllegalArgumentException {
         this.isExit = true;
-        try {
-            storage.saveTasksToCsv(taskList.getTasks());
-            ui.showFarewell();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
+        storage.saveTasksToCsv(taskList.getTasks());
+        return ui.getFarewellMessage();
     }
 }

@@ -19,12 +19,13 @@ public class ListCommand extends Command {
     /**
      * Executes the command to list all tasks.
      *
-     * @param storage The storage to save the task.
-     * @param ui The user interface to show messages.
-     * @param taskList The task list to list all tasks.
+     * @param storage The storage object to save the task to.
+     * @param taskList The task list object to list tasks from.
+     * @param ui The user interface object to interact with the user.
+     * @return The response to the user.
      */
     @Override
-    public void execute(Storage storage, Ui ui, TaskList taskList) {
-        ui.showMessage(taskList.listAllTasks());
+    public String execute(Storage storage, TaskList taskList, Ui ui) {
+        return ui.getListAllMessage(taskList.getTasks());
     }
 }
