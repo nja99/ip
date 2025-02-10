@@ -25,15 +25,6 @@ public abstract class Command {
     }
 
     /**
-     * Returns the exit status of the command.
-     *
-     * @return The exit status of the command.
-     */
-    public boolean exitRequested() {
-        return this.isExit;
-    }
-
-    /**
      * Executes the command.
      *
      * @param storage The storage to save the task.

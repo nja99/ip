@@ -45,7 +45,7 @@ public class MainWindow extends AnchorPane {
     }
 
     @FXML
-    private void handleUserInput() throws CrayonException {
+    private void handleUserInput() {
         String input = userInput.getText();
         if (!userInput.getText().isEmpty()) {
             String response = crayon.getResponse(input);
