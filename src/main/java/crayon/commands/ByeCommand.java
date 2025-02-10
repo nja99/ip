@@ -1,7 +1,5 @@
 package crayon.commands;
 
-import java.io.IOException;
-
 import crayon.enums.Action;
 import crayon.exceptions.CrayonIllegalArgumentException;
 import crayon.storage.Storage;
@@ -26,13 +24,9 @@ public class ByeCommand extends Command {
      * @throws CrayonIllegalArgumentException If there is an invalid argument.
      */
     @Override
-    public void execute(Storage storage, Ui ui, TaskList taskList) throws CrayonIllegalArgumentException {
+    public String execute(Storage storage, Ui ui, TaskList taskList) throws CrayonIllegalArgumentException {
         this.isExit = true;
-        try {
-            storage.saveTasksToCsv(taskList.getTasks());
-            ui.showFarewell();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
+        storage.saveTasksToCsv(taskList.getTasks());
+        return "Bye!";
     }
 }

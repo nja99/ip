@@ -30,7 +30,7 @@ public class FindCommand extends Command {
      * @param taskList The task list to find tasks from.
      */
     @Override
-    public void execute(Storage storage, Ui ui, TaskList taskList) {
-        ui.showMessage(taskList.listFilteredTasks(content));
+    public String execute(Storage storage, Ui ui, TaskList taskList) {
+        return taskList.listFilteredTasks(content);
     }
 }

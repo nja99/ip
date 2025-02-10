@@ -32,8 +32,7 @@ public class MarkCommand extends Command {
      * @throws CrayonIllegalArgumentException If the content is invalid.
      */
     @Override
-    public void execute(Storage storage, Ui ui, TaskList taskList) throws CrayonIllegalArgumentException {
-        String markMessage = taskList.markTaskAsDone(Integer.parseInt(content));
-        ui.showStatusAction(markMessage);
+    public String execute(Storage storage, Ui ui, TaskList taskList) throws CrayonIllegalArgumentException {
+        return taskList.markTaskAsDone(Integer.parseInt(content));
     }
 }

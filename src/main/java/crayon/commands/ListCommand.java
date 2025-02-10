@@ -24,7 +24,7 @@ public class ListCommand extends Command {
      * @param taskList The task list to list all tasks.
      */
     @Override
-    public void execute(Storage storage, Ui ui, TaskList taskList) {
-        ui.showMessage(taskList.listAllTasks());
+    public String execute(Storage storage, Ui ui, TaskList taskList) {
+        return taskList.listAllTasks();
     }
 }

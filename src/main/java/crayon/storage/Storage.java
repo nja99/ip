@@ -36,16 +36,21 @@ public class Storage {
      * Saves the tasks to a CSV file.
      *
      * @param tasks The tasks to save.
-     * @throws IOException If an I/O error occurs.
      */
-    public void saveTasksToCsv(List<Task> tasks) throws IOException {
-        List<String[]> rows = new ArrayList<>();
-        rows.add(DEFAULT_HEADER);
-        for (Task task : tasks) {
-            rows.add(task.toCsvRow());
+    public boolean saveTasksToCsv(List<Task> tasks) {
+        try {
+            List<String[]> rows = new ArrayList<>();
+            rows.add(DEFAULT_HEADER);
+            for (Task task : tasks) {
+                rows.add(task.toCsvRow());
+            }
+            CsvWriter writer = new CsvWriter(filePath);
+            writer.writeToCsv(rows);
+            return true;
+        } catch (IOException e) {
+            System.out.println("Error saving tasks to file" + e.getMessage());
+            return false;
         }
-        CsvWriter writer = new CsvWriter(filePath);
-        writer.writeToCsv(rows);
     }
 
     /**

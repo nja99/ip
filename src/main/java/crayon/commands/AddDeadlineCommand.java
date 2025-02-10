@@ -31,8 +31,7 @@ public class AddDeadlineCommand extends Command {
      * @param taskList The taskList object to add the task to.
      */
     @Override
-    public void execute(Storage storage, Ui ui, TaskList taskList) {
-        String deadlineMessage = taskList.createTask(TaskType.DEADLINE, content);
-        ui.showTaskAction(deadlineMessage);
+    public String execute(Storage storage, Ui ui, TaskList taskList) {
+        return taskList.createTask(TaskType.DEADLINE, content);
     }
 }

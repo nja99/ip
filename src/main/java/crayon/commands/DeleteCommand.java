@@ -24,8 +24,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(Storage storage, Ui ui, TaskList taskList) throws CrayonIllegalArgumentException {
-        String deleteMessage = taskList.deleteTask(Integer.parseInt(content));
-        ui.showMessage(deleteMessage);
+    public String execute(Storage storage, Ui ui, TaskList taskList) throws CrayonIllegalArgumentException {
+        return taskList.deleteTask(Integer.parseInt(content));
     }
 }

@@ -31,8 +31,7 @@ public class AddToDoCommand extends Command {
      * @param taskList The task list to add the task.
      */
     @Override
-    public void execute(Storage storage, Ui ui, TaskList taskList) {
-        String todoMessage = taskList.createTask(TaskType.TODO, content);
-        ui.showTaskAction(todoMessage);
+    public String execute(Storage storage, Ui ui, TaskList taskList) {
+        return taskList.createTask(TaskType.TODO, content);
     }
 }

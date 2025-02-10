@@ -41,5 +41,5 @@ public abstract class Command {
      * @param taskList The task list to add the task.
      * @throws CrayonException If there is an exception.
      */
-    public abstract void execute(Storage storage, Ui ui, TaskList taskList) throws CrayonException;
+    public abstract String execute(Storage storage, Ui ui, TaskList taskList) throws CrayonException;
 }
