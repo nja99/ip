@@ -19,24 +19,37 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
-            AnchorPane ap = fxmlLoader.load();
-
-            Scene scene = new Scene(ap);
-            stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setCrayon(crayon);
+            AnchorPane ap = loadMainWindow();
+            setScene(stage, ap);
+            setCloseRequestHandler(stage);
             stage.show();
-            stage.setOnCloseRequest(event -> {
-                System.out.println("Application is closing. Saving Tasks...");
-                boolean saved = crayon.saveOnExit();
-                if (saved) {
-                    System.out.println("Tasks saved successfully");
-                } else {
-                    System.out.println("Failed to save tasks.");
-                }
-            });
         } catch (IOException e) {
             System.out.println("Application could not be started.");
         }
+    }
+
+    private AnchorPane loadMainWindow() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+        AnchorPane ap = fxmlLoader.load();
+        fxmlLoader.<MainWindow>getController().setCrayon(crayon);
+
+        return ap;
+    }
+
+    private void setScene(Stage stage, AnchorPane ap) {
+        Scene scene = new Scene(ap);
+        stage.setScene(scene);
+    }
+
+    private void setCloseRequestHandler(Stage stage) {
+        stage.setOnCloseRequest(event -> {
+            System.out.println("Application is closing. Saving Tasks...");
+            boolean saved = crayon.saveOnExit();
+            if (saved) {
+                System.out.println("Tasks saved successfully");
+            } else {
+                System.out.println("Failed to save tasks.");
+            }
+        });
     }
 }
