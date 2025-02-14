@@ -25,17 +25,8 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     private DialogBox(String input, Image image) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/DialogBox.fxml"));
-            fxmlLoader.setController(this);
-            fxmlLoader.setRoot(this);
-            fxmlLoader.load();
-        } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-
-        dialog.setText(input);
-        displayPicture.setImage(image);
+        loadFxml();
+        setDialogContent(input, image);
     }
 
     public static DialogBox getUserDialog(String input, Image image) {
@@ -46,6 +37,22 @@ public class DialogBox extends HBox {
         DialogBox crayonDialog = new DialogBox(input, image);
         crayonDialog.flip();
         return crayonDialog;
+    }
+
+    private void loadFxml() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/DialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    private void setDialogContent(String input, Image image) {
+        dialog.setText(input);
+        displayPicture.setImage(image);
     }
 
     private void flip() {
