@@ -25,15 +25,15 @@ public enum Action {
      */
     public static Action fromString(String value) throws CrayonUnsupportedTaskException {
         return switch (value.toLowerCase()) {
-            case "list" -> Action.LIST;
-            case "find" -> Action.FIND;
-            case "todo" -> Action.TODO;
-            case "deadline" -> Action.DEADLINE;
-            case "event" -> Action.EVENT;
-            case "delete" -> Action.DELETE;
-            case "mark" -> Action.MARK;
-            case "unmark" -> Action.UNMARK;
-            case "bye" -> Action.BYE;
+            case "list", "ls" -> Action.LIST;
+            case "find", "f" -> Action.FIND;
+            case "todo", "td" -> Action.TODO;
+            case "deadline", "dl" -> Action.DEADLINE;
+            case "event", "e" -> Action.EVENT;
+            case "delete", "del" -> Action.DELETE;
+            case "mark", "m" -> Action.MARK;
+            case "unmark", "um" -> Action.UNMARK;
+            case "bye", "exit", "q" -> Action.BYE;
         default -> throw new CrayonUnsupportedTaskException("Unknown Action: " + value);
         };
     }
