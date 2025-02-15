@@ -9,11 +9,26 @@ import crayon.ui.Ui;
  * Represents a command to list all tasks.
  */
 public class ListCommand extends Command {
+
+    private final String taskType;
+
     /**
      * Constructs a ListCommand.
      */
     public ListCommand() {
         super(Action.LIST);
+        taskType = "all";
+    }
+
+
+    /**
+     * Constructs a ListCommand with a specified task type.
+     *
+     * @param taskTypes The task type to list.
+     */
+    public ListCommand(String taskTypes) {
+        super(Action.LIST);
+        this.taskType = taskTypes;
     }
 
     /**
@@ -26,6 +41,9 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(Storage storage, TaskList taskList, Ui ui) {
+        if (!taskType.equalsIgnoreCase("all")) {
+            return ui.getListFilteredTypes(taskList.filterTasksByType(taskType), taskType);
+        }
         return ui.getListAllMessage(taskList.getTasks());
     }
 }

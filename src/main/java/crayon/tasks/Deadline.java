@@ -61,6 +61,10 @@ public class Deadline extends Task {
         return new Deadline(taskDescription, isDone, endDate);
     }
 
+    public LocalDateTime getEndDate() {
+        return endDate;
+    }
+
     /**
      * Gets the end date of the Deadline task.
      *

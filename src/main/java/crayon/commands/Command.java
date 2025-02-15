@@ -24,6 +24,10 @@ public abstract class Command {
         this.isExit = false;
     }
 
+    public boolean getExitStatus() {
+        return isExit;
+    }
+
     /**
      * Executes the command.
      *

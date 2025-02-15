@@ -72,6 +72,10 @@ public class Event extends Task {
         return new Event(taskDescription, isDone, startDate, endDate);
     }
 
+    public LocalDateTime getStartDate() {
+        return startDate;
+    }
+
     /**
      * Gets the start date of the Event task.
      *

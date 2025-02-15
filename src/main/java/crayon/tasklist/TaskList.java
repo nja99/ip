@@ -1,8 +1,10 @@
 package crayon.tasklist;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import crayon.enums.TaskType;
 import crayon.exceptions.CrayonIllegalArgumentException;
@@ -111,7 +113,7 @@ public class TaskList {
      * @param pattern The pattern to filter the tasks with.
      * @return The list of tasks that match the pattern.
      */
-    public List<Task> filterTasks(String pattern) {
+    public List<Task> filterTasksByPattern(String pattern) {
         List<Task> filteredTask = tasks.stream()
                 .filter(task -> task.getDescription().contains(pattern))
                 .toList();
@@ -119,6 +121,23 @@ public class TaskList {
         assert filteredTask.stream().allMatch(task -> task.getDescription().contains(pattern))
                 : "Filtered Tasks must contain the given pattern";
         return filteredTask;
+    }
+
+    /**
+     * Filters the tasks based on the specified type.
+     *
+     * @param taskType The type of task to filter.
+     * @return The list of tasks that match the type.
+     */
+    public List<Task> filterTasksByType(String taskType) {
+        List<Task> filteredTask = tasks.stream()
+            .filter(task -> task.getType().equals(taskType))
+            .toList();
+
+        assert filteredTask.stream().allMatch(task -> task.getType().equals(taskType))
+            : "Filtered Tasks must be of the given type";
+
+        return sortTasks(filteredTask, taskType);
     }
 
     /**
@@ -148,5 +167,27 @@ public class TaskList {
             throw new CrayonInvalidTaskIdException("Invalid TaskID! Please enter a number between 1 - "
                     + (tasks.size() + 1));
         }
+    }
+
+    private List<Task> sortTasks(List<Task> tasks, String taskType) {
+        return switch(taskType.toLowerCase()) {
+            case "deadline" -> sortDeadlines(tasks);
+            case "event" -> sortEvents(tasks);
+            default -> sortTasks(tasks, taskType);
+        };
+    }
+
+    private List<Task> sortDeadlines(List<Task> deadlines) {
+        return deadlines.stream()
+            .map(task -> (Deadline) task)
+            .sorted(Comparator.comparing(Deadline::getEndDate))
+            .collect(Collectors.toList());
+    }
+
+    private List<Task> sortEvents(List<Task> events) {
+        return events.stream()
+            .map(task -> (Event) task)
+            .sorted(Comparator.comparing(Event::getStartDate))
+            .collect(Collectors.toList());
     }
 }
