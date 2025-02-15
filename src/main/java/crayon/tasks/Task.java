@@ -9,6 +9,7 @@ public abstract class Task {
 
     /**
      * Create a new task with the specified description
+     *
      * @param description The description of the task.
      */
     protected Task(String description) {

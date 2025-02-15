@@ -24,12 +24,20 @@ public class Storage {
 
     private final String filePath;
 
+    /**
+     * Constructs a Storage object.
+     *
+     * @param filePath The file path to save the tasks.
+     */
     public Storage(String filePath) {
         assert filePath != null : "File path cannot be null";
         assert !filePath.isEmpty() : "File path cannot be empty";
         this.filePath = filePath;
     }
 
+    /**
+     * Constructs a Storage object with a default file path.
+     */
     public Storage() {
         this(DEFAULT_PATH);
     }
