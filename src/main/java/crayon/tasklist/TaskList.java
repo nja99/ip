@@ -173,7 +173,7 @@ public class TaskList {
         return switch(taskType.toLowerCase()) {
             case "deadline" -> sortDeadlines(tasks);
             case "event" -> sortEvents(tasks);
-            default -> sortTasks(tasks, taskType);
+            default -> tasks;
         };
     }
 
