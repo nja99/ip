@@ -2,6 +2,7 @@ package crayon.tasklist;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import crayon.enums.TaskType;
@@ -32,6 +33,7 @@ public class TaskList {
      */
     public TaskList(List<Task> tasks) {
         this.tasks.addAll(tasks);
+        assert this.tasks.stream().noneMatch(Objects::isNull) : "Task List cannot contain null items";
     }
 
     /**
@@ -64,6 +66,7 @@ public class TaskList {
      * @throws CrayonIllegalArgumentException If the task ID is invalid.
      */
     public Task deleteTask(int taskId) throws CrayonIllegalArgumentException {
+
         validateTaskId(taskId);
 
         return tasks.remove(taskId - 1);
@@ -82,6 +85,7 @@ public class TaskList {
         Task task = tasks.get(taskId - 1);
         task.markDone();
 
+        assert task.getDoneStatus() : "Task should be marked as done after calling markTaskAsDone";
         return task;
     }
 
@@ -98,6 +102,7 @@ public class TaskList {
         Task task = tasks.get(taskId - 1);
         task.markUndone();
 
+        assert !task.getDoneStatus() : "Task should be marked as undone after calling markTaskAsUndone";
         return task;
     }
 
@@ -108,9 +113,13 @@ public class TaskList {
      * @return The list of tasks that match the pattern.
      */
     public List<Task> filterTasks(String pattern) {
-        return tasks.stream()
+        List<Task> filteredTask = tasks.stream()
                 .filter(task -> task.getDescription().contains(pattern))
-                .collect(Collectors.toList());
+                .toList();
+
+        assert filteredTask.stream().allMatch(task -> task.getDescription().contains(pattern))
+                : "Filtered Tasks must contain the given pattern";
+        return filteredTask;
     }
 
     /**

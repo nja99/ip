@@ -25,6 +25,10 @@ public class Parser {
      * @return The command that corresponds to the user input.
      */
     public static Command parseCommand(String userInput) {
+
+        assert userInput != null : "User input shouldn't be null";
+        assert !userInput.trim().isEmpty() : "User input shouldn't be empty";
+
         String[] args = userInput.split(" ", 2);
         String content = "";
 
@@ -34,6 +38,8 @@ public class Parser {
 
         try {
             Action action = Action.fromString(args[0]);
+            assert action != null : "The action parsed from user should be valid";
+
             return switch (action) {
                 case LIST -> new ListCommand();
                 case FIND -> new FindCommand(content);
