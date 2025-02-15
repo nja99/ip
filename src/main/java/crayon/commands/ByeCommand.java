@@ -27,7 +27,6 @@ public class ByeCommand extends Command {
     @Override
     public String execute(Storage storage, TaskList taskList, Ui ui) throws CrayonIllegalArgumentException {
         this.isExit = true;
-        storage.saveTasksToCsv(taskList.getTasks());
         return ui.getFarewellMessage();
     }
 }

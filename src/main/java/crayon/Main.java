@@ -43,13 +43,7 @@ public class Main extends Application {
 
     private void setCloseRequestHandler(Stage stage) {
         stage.setOnCloseRequest(event -> {
-            System.out.println("Application is closing. Saving Tasks...");
-            boolean saved = crayon.saveOnExit();
-            if (saved) {
-                System.out.println("Tasks saved successfully");
-            } else {
-                System.out.println("Failed to save tasks.");
-            }
+            crayon.saveOnExit();
         });
     }
 }

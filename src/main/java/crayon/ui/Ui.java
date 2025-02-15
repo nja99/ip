@@ -14,7 +14,8 @@ public class Ui {
             "Hello! I'm Crayon, your personal assistant for managing tasks. How can I help you today?";
 
     private static final String FAREWELL_MESSAGE =
-            "Goodbye! It was nice chatting with you. Let me know if you need help with tasks again!";
+            "Goodbye! It was nice chatting with you. Let me know if you need help with tasks again!\n\n"
+            + "The application will close in 3 seconds.";
 
     private static final String UNKNOWN_COMMAND_MESSAGE = "I'm sorry, but I didn't understand that command.";
 

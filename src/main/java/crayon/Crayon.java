@@ -18,6 +18,8 @@ public class Crayon {
     private final Storage storage;
     private TaskList taskList;
 
+    private boolean isExit = false;
+
     /**
      * Constructs a new Crayon instance.
      */
@@ -42,7 +44,9 @@ public class Crayon {
         try {
             Command command = Parser.parseCommand(input);
             if (command != null) {
-                return command.execute(storage, taskList, ui);
+                String response = command.execute(storage, taskList, ui);
+                isExit = command.getExitStatus();
+                return response;
             } else {
                 return ui.getUnknownCommandMessage();
             }
@@ -62,10 +66,18 @@ public class Crayon {
 
     /**
      * Saves the tasks to the storage file when the application exits.
-     *
-     * @return True if the tasks were saved successfully, false otherwise.
      */
-    public boolean saveOnExit() {
-        return storage.saveTasksToCsv(taskList.getTasks());
+    public void saveOnExit() {
+        System.out.println("Application is closing. Saving Tasks...");
+        boolean saved = storage.saveTasksToCsv(taskList.getTasks());
+        if (saved) {
+            System.out.println("Tasks saved successfully");
+        } else {
+            System.out.println("Failed to save tasks.");
+        }
+    }
+
+    public boolean isExitCommand() {
+        return isExit;
     }
 }
