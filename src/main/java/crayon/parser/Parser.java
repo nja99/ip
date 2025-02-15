@@ -58,7 +58,9 @@ public class Parser {
 
     private static Command createCommand(Action action, String content) {
         return switch (action) {
-            case LIST -> new ListCommand();
+            case LIST -> content.isEmpty()
+                ? new ListCommand()
+                : new ListCommand(content);
             case FIND -> new FindCommand(content);
             case TODO -> new AddToDoCommand(content);
             case DEADLINE -> new AddDeadlineCommand(content);

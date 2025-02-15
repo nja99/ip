@@ -52,19 +52,26 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         if (!userInput.getText().isEmpty()) {
-            String response = crayon.getResponse(input);
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, USER_IMAGE),
-                    DialogBox.getCrayonDialog(response, CRAYON_IMAGE)
-            );
+            processInput(input);
 
-            if(crayon.isExitCommand()) {
+            if (crayon.isExitCommand()) {
                 crayon.saveOnExit();
-                PauseTransition delay = new PauseTransition(Duration.seconds(3));
-                delay.setOnFinished(event -> Platform.exit());
-                delay.play();
+                delayBeforeExit();
             }
         }
         userInput.clear();
+    }
+
+    private void processInput(String input) {
+        String response = crayon.getResponse(input);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, USER_IMAGE),
+                DialogBox.getCrayonDialog(response, CRAYON_IMAGE)
+        );
+    }
+    private void delayBeforeExit() {
+        PauseTransition delay = new PauseTransition(Duration.seconds(3));
+        delay.setOnFinished(event -> Platform.exit());
+        delay.play();
     }
 }

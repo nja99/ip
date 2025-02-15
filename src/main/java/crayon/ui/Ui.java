@@ -26,6 +26,7 @@ public class Ui {
     private static final String TASK_UNDONE_MESSAGE = "OK, I've marked this task as not done yet";
     private static final String LIST_ALL_TASK_MESSAGE = "Here are the tasks in your list:";
     private static final String LIST_FILTERED_TASKS_MESSAGE = "Here are the matching tasks in your list:";
+    private static final String LIST_FILTERED_TYPES_MESSAGE = "Here are the %s tasks in your list:";
 
     /**
      * Returns the welcome message.
@@ -114,6 +115,11 @@ public class Ui {
      */
     public String getListFilteredTasksMessage(List<Task> tasks) {
         return formatTaskList(tasks, LIST_FILTERED_TASKS_MESSAGE);
+    }
+
+    public String getListFilteredTypes(List<Task> tasks, String taskType) {
+        String formattedString = String.format(LIST_FILTERED_TYPES_MESSAGE, taskType);
+        return formatTaskList(tasks, formattedString);
     }
 
     private String formatTaskList(List<Task> taskList, String header) {
