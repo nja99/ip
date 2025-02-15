@@ -25,6 +25,10 @@ public abstract class Task {
         return description;
     }
 
+    public boolean getDoneStatus() {
+        return isDone;
+    }
+
     /**
      * Marks the task as done by setting {@code isDone} to {@code true}.
      */

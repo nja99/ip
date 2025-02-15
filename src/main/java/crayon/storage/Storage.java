@@ -25,6 +25,8 @@ public class Storage {
     private final String filePath;
 
     public Storage(String filePath) {
+        assert filePath != null : "File path cannot be null";
+        assert !filePath.isEmpty() : "File path cannot be empty";
         this.filePath = filePath;
     }
 
@@ -38,6 +40,10 @@ public class Storage {
      * @param tasks The tasks to save.
      */
     public boolean saveTasksToCsv(List<Task> tasks) {
+
+        assert tasks != null : "Tasks List cannot be null";
+        assert !tasks.contains(null) : "Tasks List cannot contain null task";
+
         try {
             List<String[]> rows = prepareTaskRows(tasks);
             writeRowsToCsv(rows);

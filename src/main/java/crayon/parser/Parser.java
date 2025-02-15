@@ -26,9 +26,14 @@ public class Parser {
      */
     public static Command parseCommand(String userInput) {
 
+        assert userInput != null : "User input shouldn't be null";
+        assert !userInput.trim().isEmpty() : "User input shouldn't be empty";
+
         try {
             Action action = parseAction(userInput);
             String content = parseContent(userInput);
+            assert action != null : "The action parsed from user should be valid";
+
             return createCommand(action, content);
         } catch (CrayonUnsupportedTaskException e) {
             System.out.println(e.getMessage());
@@ -37,6 +42,7 @@ public class Parser {
     }
 
     private static Action parseAction(String userInput) throws CrayonUnsupportedTaskException {
+
         String[] args = userInput.split(" ", 2);
         try {
             return Action.fromString(args[0]);
