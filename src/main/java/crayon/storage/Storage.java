@@ -45,13 +45,8 @@ public class Storage {
         assert !tasks.contains(null) : "Tasks List cannot contain null task";
 
         try {
-            List<String[]> rows = new ArrayList<>();
-            rows.add(DEFAULT_HEADER);
-            for (Task task : tasks) {
-                rows.add(task.toCsvRow());
-            }
-            CsvWriter writer = new CsvWriter(filePath);
-            writer.writeToCsv(rows);
+            List<String[]> rows = prepareTaskRows(tasks);
+            writeRowsToCsv(rows);
             return true;
         } catch (IOException e) {
             System.out.println("Error saving tasks to file" + e.getMessage());
@@ -66,29 +61,48 @@ public class Storage {
      * @throws IOException If an I/O error occurs.
      */
     public List<Task> loadTasksFromCsv() throws IOException {
-
         CsvReader reader = new CsvReader(filePath);
         List<String[]> rows = reader.readFromCsv();
+        return processCsvRows(rows);
+    }
 
-        List<Task> tasks = new ArrayList<>();
-
-        // Skip header row
-        for (int i = 1; i < rows.size(); i++) {
-            String[] values = rows.get(i);
-            assert values.length == DEFAULT_HEADER.length : "CSV row does not contain expected number of columns";
-
-            TaskType taskType = TaskType.fromString(values[0]);
-            try {
-                Task task = switch(taskType) {
+    private Task createTaskFromCsvRow(String[] values) {
+        TaskType taskType = TaskType.fromString(values[0]);
+        try {
+            return switch(taskType) {
                 case TODO -> createToDoFromCsv(values);
                 case EVENT -> createEventFromCsv(values);
                 case DEADLINE -> createDeadlineFromCsv(values);
-                };
+            };
+        } catch (CrayonInvalidFormatException e) {
+            System.out.println("Error parsing task: " + e.getMessage());
+            return null;
+        }
+    }
+
+    private List<String[]> prepareTaskRows(List<Task> tasks) {
+        List<String[]> rows = new ArrayList<>();
+        rows.add(DEFAULT_HEADER);
+        for (Task task : tasks) {
+            rows.add(task.toCsvRow());
+        }
+        return rows;
+    }
+
+    private List<Task> processCsvRows(List<String[]> rows) {
+        List<Task> tasks = new ArrayList<>();
+        for (int i = 1; i < rows.size(); i++) {
+            String[] values = rows.get(i);
+            Task task = createTaskFromCsvRow(values);
+            if (task != null) {
                 tasks.add(task);
-            } catch (CrayonInvalidFormatException e) {
-                System.out.println(e.getMessage());
             }
         }
         return tasks;
+    }
+
+    private void writeRowsToCsv(List<String[]> rows) throws IOException {
+        CsvWriter writer = new CsvWriter(filePath);
+        writer.writeToCsv(rows);
     }
 }

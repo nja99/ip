@@ -3,7 +3,6 @@ package crayon.tasklist;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import crayon.enums.TaskType;
 import crayon.exceptions.CrayonIllegalArgumentException;
@@ -45,14 +44,18 @@ public class TaskList {
      * @throws CrayonTaskCreationException If the task description is invalid.
      */
     public Task createTask(TaskType taskType, String description) throws CrayonTaskCreationException {
+        Task task = createTaskOfType(taskType, description);
+        tasks.add(task);
+        return task;
+    }
+
+    private Task createTaskOfType(TaskType taskType, String description) throws CrayonTaskCreationException {
         try {
-            Task task = switch (taskType) {
+            return switch (taskType) {
                 case TODO -> ToDo.createToDoTask(description);
                 case DEADLINE -> Deadline.createDeadlineTask(description);
                 case EVENT -> Event.createEventTask(description);
             };
-            tasks.add(task);
-            return task;
         } catch (CrayonInvalidFormatException e) {
             throw new CrayonTaskCreationException(e.getMessage());
         }
@@ -66,9 +69,7 @@ public class TaskList {
      * @throws CrayonIllegalArgumentException If the task ID is invalid.
      */
     public Task deleteTask(int taskId) throws CrayonIllegalArgumentException {
-
         validateTaskId(taskId);
-
         return tasks.remove(taskId - 1);
     }
 
@@ -81,7 +82,6 @@ public class TaskList {
      */
     public Task markTaskAsDone(int taskId) throws CrayonIllegalArgumentException {
         validateTaskId(taskId);
-
         Task task = tasks.get(taskId - 1);
         task.markDone();
 
@@ -98,7 +98,6 @@ public class TaskList {
      */
     public Task markTaskAsUndone(int taskId) throws CrayonIllegalArgumentException {
         validateTaskId(taskId);
-
         Task task = tasks.get(taskId - 1);
         task.markUndone();
 
