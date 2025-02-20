@@ -15,6 +15,9 @@ import org.junit.jupiter.api.io.TempDir;
 
 import crayon.tasks.Task;
 
+/**
+ * Represents a test class for the Storage class.
+ */
 public class StorageTest {
 
     @TempDir
@@ -23,20 +26,26 @@ public class StorageTest {
     private Storage storage;
     private Path testFilePath;
 
+    /**
+     * Sets up the test environment.
+     *
+     * @throws IOException If an I/O error occurs.
+     */
     @BeforeEach
     void setUp() throws IOException {
         testFilePath = tempDir.resolve("test_tasks.csv");
         storage = new Storage(testFilePath.toString());
     }
 
+    // Test the saveTasksToCsv method
     @Test
     void testSaveTasksToCsv() throws IOException {
         List<Task> tasks = new ArrayList<>();
         tasks.add(new TaskStub("todo", "Homework", false, new String[]{"todo", "false", "homework"}));
         tasks.add(new TaskStub("event", "Career Fair", false, new String[]{
-                "event", "false", "Career Fair", "2025-02-07T14:00:00", "2025-02-07T15:00:00"}));
+            "event", "false", "Career Fair", "2025-02-07T14:00:00", "2025-02-07T15:00:00"}));
         tasks.add(new TaskStub("deadline", "Submit Report", false, new String[]{
-                "deadline", "false", "Submit Report", "", "2025-02-08T14:00:00"}));
+            "deadline", "false", "Submit Report", "", "2025-02-08T14:00:00"}));
 
 
         // Save tasks
@@ -56,14 +65,15 @@ public class StorageTest {
         assertEquals("deadline,false,Submit Report,,2025-02-08T14:00:00", lines.get(3));
     }
 
+    // Test the loadTasksFromCsv method
     @Test
     void testLoadTasksFromCsv() throws IOException {
         // Manually write test CSV data
         List<String> csvLines = List.of(
-                "task,isDone,description,startDate,endDate",
-                "todo,false,homework",
-                "event,false,Career Fair,2025-02-07T14:00:00,2025-02-07T15:00:00",
-                "deadline,false,Submit Report,,2025-02-08T14:00:00"
+            "task,isDone,description,startDate,endDate",
+            "todo,false,homework",
+            "event,false,Career Fair,2025-02-07T14:00:00,2025-02-07T15:00:00",
+            "deadline,false,Submit Report,,2025-02-08T14:00:00"
         );
         Files.write(testFilePath, csvLines);
 

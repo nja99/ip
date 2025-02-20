@@ -24,11 +24,21 @@ public class TaskStub extends Task {
         this.csvRow = csvRow;
     }
 
+    /**
+     * Returns the CSV row of the task.
+     *
+     * @return The CSV row of the task.
+     */
     @Override
     public String[] toCsvRow() {
         return csvRow;
     }
 
+    /**
+     * Returns the type of the task.
+     *
+     * @return The type of the task.
+     */
     @Override
     public String getType() {
         return type;
