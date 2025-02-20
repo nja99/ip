@@ -45,6 +45,7 @@ public class Main extends Application {
     private void setScene(Stage stage, AnchorPane ap) {
         Scene scene = new Scene(ap);
         stage.getIcons().add(ICON);
+        stage.setTitle("Crayon");
         stage.setScene(scene);
     }
 

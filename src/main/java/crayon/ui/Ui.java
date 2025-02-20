@@ -11,10 +11,10 @@ import crayon.tasks.Task;
 public class Ui {
 
     private static final String WELCOME_MESSAGE =
-            "Hello! I'm Crayon, your personal assistant for managing tasks. How can I help you today?";
+            "Hello! I'm Crayon, your personal assistant for managing task(s). How can I help you today?";
 
     private static final String FAREWELL_MESSAGE =
-            "Goodbye! It was nice chatting with you. Let me know if you need help with tasks again!\n\n"
+            "Goodbye! It was nice chatting with you. Let me know if you need help with task(s) again!\n\n"
             + "The application will close in 3 seconds.";
 
     private static final String UNKNOWN_COMMAND_MESSAGE = "I'm sorry, but I didn't understand that command.";
@@ -24,9 +24,9 @@ public class Ui {
     private static final String TASK_REMOVED_MESSAGE = "Noted. I've removed this task";
     private static final String TASK_DONE_MESSAGE = "Nice! I've marked this task as done";
     private static final String TASK_UNDONE_MESSAGE = "OK, I've marked this task as not done yet";
-    private static final String LIST_ALL_TASK_MESSAGE = "Here are the tasks in your list:";
-    private static final String LIST_FILTERED_TASKS_MESSAGE = "Here are the matching tasks in your list:";
-    private static final String LIST_FILTERED_TYPES_MESSAGE = "Here are the %s tasks in your list:";
+    private static final String LIST_ALL_TASK_MESSAGE = "Here are the task(s) in your list:";
+    private static final String LIST_FILTERED_TASKS_MESSAGE = "Here are the matching task(s) in your list:";
+    private static final String LIST_FILTERED_TYPES_MESSAGE = "Here are the %s task(s) in your list:";
 
     /**
      * Returns the welcome message.
@@ -138,6 +138,6 @@ public class Ui {
 
     private String formatTaskAction(Task task, String message, int size) {
         return message + "\n    " + task + "\n"
-                + "Now you have " + size + " tasks in your list\n";
+                + "Now you have " + size + " task(s) in your list\n";
     }
 }
