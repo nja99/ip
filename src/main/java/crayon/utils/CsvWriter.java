@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Represents a CSV writer to write to a CSV file.
+ * The CSV file is expected to have a header and content.
  */
 public class CsvWriter {
 

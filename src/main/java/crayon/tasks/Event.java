@@ -8,6 +8,7 @@ import crayon.utils.DateTime;
 
 /**
  * Represents an Event task in Crayon.
+ * An Event task has a description, a start date and an end date.
  */
 public class Event extends Task {
 

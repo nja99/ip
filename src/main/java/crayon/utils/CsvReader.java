@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Represents a CSV reader to read from a CSV file.
+ * The CSV file is expected to have a header and content.
  */
 public class CsvReader {
 

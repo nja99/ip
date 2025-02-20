@@ -7,6 +7,7 @@ import crayon.utils.DateTime;
 
 /**
  * Represents a Deadline task in Crayon.
+ * A Deadline task has a description and an end date.
  */
 public class Deadline extends Task {
 
@@ -61,6 +62,11 @@ public class Deadline extends Task {
         return new Deadline(taskDescription, isDone, endDate);
     }
 
+    /**
+     * Gets the end date of the Deadline task.
+     *
+     * @return The end date of the Deadline task.
+     */
     public LocalDateTime getEndDate() {
         return endDate;
     }

@@ -4,6 +4,7 @@ import crayon.exceptions.CrayonInvalidFormatException;
 
 /**
  * Represents a ToDo task.
+ * A ToDo task has a description.
  */
 public class ToDo extends Task {
 

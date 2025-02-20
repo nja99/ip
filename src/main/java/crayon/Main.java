@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 
 /**
  * Main class for the Crayon application.
+ * Crayon is a simple task manager that allows users to manage their tasks.
  */
 public class Main extends Application {
 

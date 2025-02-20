@@ -8,6 +8,7 @@ import crayon.exceptions.CrayonInvalidDateTimeException;
 
 /**
  * Represents a utility class for date and time operations.
+ * The date and time is expected to be in the format: d/M/yyyy HHmm.
  */
 public class DateTime {
 

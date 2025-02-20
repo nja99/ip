@@ -15,6 +15,7 @@ import javafx.scene.layout.HBox;
 
 /**
  * A dialog box to display messages.
+ * The dialog box contains a label to display the message and an image view to display the image.
  */
 public class DialogBox extends HBox {
 
@@ -29,10 +30,24 @@ public class DialogBox extends HBox {
         setDialogContent(input, image);
     }
 
+    /**
+     * Creates a dialog box with the user's message and image.
+     *
+     * @param input The user's message.
+     * @param image The user's image.
+     * @return A dialog box with the user's message and image.
+     */
     public static DialogBox getUserDialog(String input, Image image) {
         return new DialogBox(input, image);
     }
 
+    /**
+     * Creates a dialog box with Crayon's message and image.
+     *
+     * @param input The Crayon's message.
+     * @param image The Crayon's image.
+     * @return A dialog box with Crayon's message and image.
+     */
     public static DialogBox getCrayonDialog(String input, Image image) {
         DialogBox crayonDialog = new DialogBox(input, image);
         crayonDialog.flip();

@@ -16,6 +16,7 @@ import javafx.util.Duration;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
+ * MainWindow is the application's main window.
  */
 public class MainWindow extends AnchorPane {
 
@@ -46,6 +47,11 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets the Crayon object to be used by the MainWindow.
+     *
+     * @param crayon The Crayon object to be used by the MainWindow.
+     */
     public void setCrayon(Crayon crayon) {
         this.crayon = crayon;
         dialogContainer.getChildren().add(DialogBox.getCrayonDialog(crayon.showWelcomeMessage(), CRAYON_IMAGE));

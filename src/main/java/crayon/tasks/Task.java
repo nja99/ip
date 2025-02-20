@@ -2,6 +2,7 @@ package crayon.tasks;
 
 /**
  * Represents a task.
+ * A task has a description and a status.
  */
 public abstract class Task {
     protected String description;
@@ -22,10 +23,20 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Retrieves the description of the task.
+     *
+     * @return The description of the task.
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Retrieves the status of the task.
+     *
+     * @return A boolean representing the status of the task.
+     */
     public boolean getDoneStatus() {
         return isDone;
     }

@@ -77,6 +77,11 @@ public class Crayon {
         }
     }
 
+    /**
+     * Checks if the exit command is entered.
+     *
+     * @return True if the exit command is entered, false otherwise.
+     */
     public boolean isExitCommand() {
         return isExit;
     }

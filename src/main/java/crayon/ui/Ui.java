@@ -117,6 +117,13 @@ public class Ui {
         return formatTaskList(tasks, LIST_FILTERED_TASKS_MESSAGE);
     }
 
+    /**
+     * Returns the message to be displayed when listing filtered tasks by type.
+     *
+     * @param tasks The list of tasks to be displayed.
+     * @param taskType The type of tasks to be displayed.
+     * @return The message to be displayed.
+     */
     public String getListFilteredTypes(List<Task> tasks, String taskType) {
         String formattedString = String.format(LIST_FILTERED_TYPES_MESSAGE, taskType);
         return formatTaskList(tasks, formattedString);
