@@ -14,23 +14,25 @@ Take productivity to the next level. Meet Crayon, and get things done.
 ## Get Started
 All you need to do is,
 
-1. Download it from [here](https://github.com/nja99/ip)
-2. Start by double-clicking the App.
-3. Add your Tasks.
-4. Let **Crayon** do the rest for you! 😉
+1. Download the jar from [here](https://github.com/nja99/ip/releases)
+2. Place the jar file in a folder.
+3. Start by double-clicking the App.
+4. Add your Tasks.
+5. Let **Crayon** do the rest for you! 😉
 
 ## Commands
- Command          | Prefixes           | Description                                    |
-|-----------------|--------------------|------------------------------------------------|
-| Add ToDo        | `todo`, `td`       | Add a new ToDo task to your list.              |
-| Add Deadline    | `deadline`, `dl`   | Add a new Deadline task to your list.          |
-| Add Event       | `event`,`e`        | Add a new Even task to your list.              |
-| Mark as Done    | `mark`, `m`        | Mark a task as completed.                      |
-| Mark as Undone  | `unmark`, `um`     | Mark a task as uncompleted.                    |
-| Delete Task     | `delete`, `del`    | Delete a task from your list                   |
-| List Task(s)    | `list`, `ls`       | Displays all your current tasks.               |
-| Find Task(s)    | `find`, `f`        | Find a task that contains a specific `keyword` |
-| Exit and Save   | `bye`, `exit`, `q` | Save all task and exit the program             |
+
+| Command        | Prefixes            | Description                                    |
+|----------------|---------------------|------------------------------------------------|
+| Add ToDo       | `todo`, `td`        | Add a new ToDo task to your list.              |
+| Add Deadline   | `deadline`, `dl`    | Add a new Deadline task to your list.          |
+| Add Event      | `event`,`e`         | Add a new Event task to your list.             |
+| Mark as Done   | `mark`, `m`         | Mark a task as completed.                      |
+| Mark as Undone | `unmark`, `um`      | Mark a task as uncompleted.                    |
+| Delete Task    | `delete`, `del`     | Delete a task from your list                   |
+| List Task(s)   | `list`, `ls`        | Displays all your current tasks.               |
+| Find Task(s)   | `find`, `f`         | Find a task that contains a specific `keyword` |
+| Exit and Save  | `bye`, `exit`, `q`  | Save all task and exit the program             |
 
 ### Adding ToDos
 **Add a new ToDo task**
@@ -91,7 +93,7 @@ Now you have 1 task(s) in your list
 ```
 
 ### Find Task(s)
-**Show list of task(s) containing a specific `keyword`**
+**Show a list of task(s) containing a specific `keyword`**
 
 *Command Syntax* `find <keyword> | f <keyword>`
 
