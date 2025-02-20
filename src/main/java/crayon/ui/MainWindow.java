@@ -19,8 +19,11 @@ import javafx.util.Duration;
  */
 public class MainWindow extends AnchorPane {
 
+    // Icon taken from https://www.flaticon.com/free-icon/user_9131549
     private static final Image USER_IMAGE = new Image(Objects.requireNonNull(
             MainWindow.class.getResourceAsStream("/images/userProfile.png")));
+
+    // Icon taken from https://www.flaticon.com/free-icon/crayon_732403
     private static final Image CRAYON_IMAGE = new Image(Objects.requireNonNull(
             MainWindow.class.getResourceAsStream("/images/crayonProfile.png")));
 

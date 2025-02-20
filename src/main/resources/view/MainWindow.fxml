@@ -28,6 +28,7 @@
                 AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="5.0">
             <graphic>
                 <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
+                    <!--Image taken from https://iconduck.com/icons/173971/send -->
                     <Image url="@/images/button.png"/>
                 </ImageView>
             </graphic>
