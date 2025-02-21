@@ -4,6 +4,7 @@ package crayon.exceptions;
  * Represents an exception in Crayon.
  */
 public class CrayonException extends Exception {
+
     /**
      * Constructs a CrayonException.
      *

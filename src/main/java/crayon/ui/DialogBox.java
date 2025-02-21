@@ -77,5 +77,4 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
         dialog.getStyleClass().add("reply-label");
     }
-
 }

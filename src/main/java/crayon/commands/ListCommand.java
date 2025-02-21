@@ -20,7 +20,6 @@ public class ListCommand extends Command {
         taskType = "all";
     }
 
-
     /**
      * Constructs a ListCommand with a specified task type.
      *

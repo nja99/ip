@@ -4,6 +4,7 @@ package crayon.exceptions;
  * Represents an exception that occurs when creating a task.
  */
 public class CrayonTaskCreationException extends CrayonException {
+
     /**
      * Constructs a new CrayonTaskCreationException instance with the specified message.
      *

@@ -41,6 +41,5 @@ public class CsvWriter {
                 writer.write(String.join(",", row) + "\n");
             }
         }
-
     }
 }

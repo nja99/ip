@@ -52,6 +52,5 @@ public class Main extends Application {
 
     private void setCloseRequestHandler(Stage stage) {
         stage.setOnCloseRequest(event -> crayon.saveOnExit());
-
     }
 }

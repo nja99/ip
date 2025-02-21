@@ -78,6 +78,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getCrayonDialog(response, CRAYON_IMAGE)
         );
     }
+
     private void delayBeforeExit() {
         PauseTransition delay = new PauseTransition(Duration.seconds(3));
         delay.setOnFinished(event -> Platform.exit());
