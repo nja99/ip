@@ -165,7 +165,7 @@ public class TaskList {
 
         if (taskId < 1 || taskId >= tasks.size() + 1) {
             throw new CrayonInvalidTaskIdException("Invalid TaskID! Please enter a number between 1 - "
-                    + (tasks.size() + 1));
+                    + tasks.size());
         }
     }
 
