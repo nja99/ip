@@ -34,7 +34,7 @@ public enum Action {
             case "mark", "m" -> Action.MARK;
             case "unmark", "um" -> Action.UNMARK;
             case "bye", "exit", "q" -> Action.BYE;
-        default -> throw new CrayonUnsupportedTaskException("Unknown Action: " + value);
+            default -> throw new CrayonUnsupportedTaskException("Unknown Action: " + value);
         };
     }
 }
