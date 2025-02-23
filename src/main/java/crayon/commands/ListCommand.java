@@ -1,6 +1,7 @@
 package crayon.commands;
 
 import crayon.enums.Action;
+import crayon.enums.TaskType;
 import crayon.storage.Storage;
 import crayon.tasklist.TaskList;
 import crayon.ui.Ui;
@@ -40,9 +41,29 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(Storage storage, TaskList taskList, Ui ui) {
-        if (!taskType.equalsIgnoreCase("all")) {
-            return ui.getListFilteredTypes(taskList.filterTasksByType(taskType), taskType);
+        if (taskType.equalsIgnoreCase("all")) {
+            return ui.getListAllMessage(taskList.getTasks());
         }
-        return ui.getListAllMessage(taskList.getTasks());
+
+        if (!isValidTaskType()) {
+            return ui.getUnknownCommandMessage();
+        }
+
+        return ui.getListFilteredTypes(taskList.filterTasksByType(taskType), taskType);
+    }
+
+    /**
+     * Validates the provided task type.
+     *
+     * @return True if the task type is valid, false otherwise.
+     */
+    private boolean isValidTaskType() {
+        try {
+            TaskType.fromString(taskType);
+            return true;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid task type: " + taskType);
+            return false;
+        }
     }
 }
